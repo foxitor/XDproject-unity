@@ -4,7 +4,7 @@ public class CommandInput : MonoBehaviour {
     public RobotActionApply RobotActionMaking;
     public void WhileTyping() {
         InputField MyField = this.gameObject.GetComponent<InputField>();
-        MyField.text = MyField.text.Replace(",", "\n");
+        MyField.text = MyField.text.Replace(",", "\n"); MyField.text = MyField.text.Replace(" ", "");
     }
     public void readNsend() {
         InputField MyField = this.gameObject.GetComponent<InputField>();
