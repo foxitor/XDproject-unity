@@ -16,9 +16,9 @@ public class RobotBrain : MonoBehaviour {
         transform.position = MovedPosition;
     }
     public void Charge() {
-        Debug.Log("Charging" + isOnCharger());
+        Debug.Log("Charging" + DefineSurfaceID());
     }
-    bool isOnCharger() {
-        return true;
+    string DefineSurfaceID() {
+        return "";
     }
 }
