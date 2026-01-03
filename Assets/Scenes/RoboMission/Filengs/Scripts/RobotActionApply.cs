@@ -1,8 +1,11 @@
 using System.Collections.Generic; using UnityEngine; using System.Collections;
 
 public class RobotActionApply : MonoBehaviour {
-    public RobotBrain Brain; public float CommandComplitionDelay;
-    bool isComplitingCommand;
+    public CommandInput Console;
+    public RobotBrain Brain; 
+    public float CommandComplitionDelay;
+    //#comandHelding
+    bool isComplitingCommand; 
     Queue<(RobotActions, string)> commandQueue = new Queue<(RobotActions, string)>();
 
     public void ApplyAction(RobotActions Action, string BonusInfo) {
@@ -10,6 +13,9 @@ public class RobotActionApply : MonoBehaviour {
         if (!isComplitingCommand) {
             StartCoroutine(ProcessNextCommand());
         }
+    }
+    void Update() {
+        Console.gameObject.SetActive(!isComplitingCommand);
     }
 
     IEnumerator ProcessNextCommand() {

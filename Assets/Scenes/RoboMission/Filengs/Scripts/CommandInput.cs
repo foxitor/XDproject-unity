@@ -6,27 +6,19 @@ public class CommandInput : MonoBehaviour {
         InputField MyField = this.gameObject.GetComponent<InputField>();
         //MyField.text = "Test";
         string[] commands = MyField.text.Split(new char[] { ',', ' ', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
-        foreach (string command in commands) {
-            string trimmedCommand = command.Trim().ToLower();
-            switch (trimmedCommand) {
-                case "move(left)":
-                    RobotActionMaking.ApplyAction(RobotActions.Move, "left");
-                    break;
-                case "move(up)":
-                    RobotActionMaking.ApplyAction(RobotActions.Move, "up");
-                    break;
-                case "move(right)":
-                    RobotActionMaking.ApplyAction(RobotActions.Move, "right");
-                    break;
-                case "move(down)":
-                    RobotActionMaking.ApplyAction(RobotActions.Move, "down");
-                    break;
-                case "charge()":
-                    RobotActionMaking.ApplyAction(RobotActions.Charge, "");
-                    break;
-                default:
-                    Debug.Log("Err01(UnknownCommand) : " + command);
-                    break;
+        foreach (string cmd in commands) {
+            string command = cmd.ToLower();
+            if (command.StartsWith("move(") && command.EndsWith(")")) {
+                int startIdx = command.IndexOf('(') + 1;
+                int endIdx = command.IndexOf(')');
+                string direction = command.Substring(startIdx, endIdx - startIdx);
+                RobotActionMaking.ApplyAction(RobotActions.Move, direction);
+            }
+            else if (command == "charge()") {
+                RobotActionMaking.ApplyAction(RobotActions.Charge, "");
+            }
+            else {
+                Debug.Log("Err01(Unknown command) : " + command);
             }
         }
     }
