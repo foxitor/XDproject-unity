@@ -16,7 +16,7 @@ public class RobotBrain : MonoBehaviour {
         transform.position = MovedPosition;
     }
     public void Charge() {
-        Debug.log("Charging" + isOnCharger());
+        Debug.Log("Charging" + isOnCharger());
     }
     bool isOnCharger() {
         return true;

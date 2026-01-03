@@ -2,7 +2,6 @@ using System.Collections; using System.Collections.Generic; using UnityEngine; u
 
 public class CommandInput : MonoBehaviour {
     public RobotActionApply RobotActionMaking;
-    public float CommandComplitionDelay;
     public void readNsend() {
         InputField MyField = this.gameObject.GetComponent<InputField>();
         //MyField.text = "Test";
