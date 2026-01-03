@@ -2,6 +2,10 @@ using System.Collections; using System.Collections.Generic; using UnityEngine; u
 
 public class CommandInput : MonoBehaviour {
     public RobotActionApply RobotActionMaking;
+    public void WhileTyping() {
+        InputField MyField = this.gameObject.GetComponent<InputField>();
+        MyField.text = MyField.text.Replace(",", "\n");
+    }
     public void readNsend() {
         InputField MyField = this.gameObject.GetComponent<InputField>();
         //MyField.text = "Test";
