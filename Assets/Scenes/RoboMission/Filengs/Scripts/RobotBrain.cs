@@ -2,7 +2,7 @@ using System.Collections; using System.Collections.Generic; using UnityEngine;
 
 public class RobotBrain : MonoBehaviour {
     public float LeftEnergy; public float MovementPower = 1f;
-    public LayerMask obstacleMask;
+    GameObject StandingOn;
     public void Move(string Direction) {
         Vector3 Axis = Vector3.zero;
         switch (Direction) {
@@ -17,12 +17,23 @@ public class RobotBrain : MonoBehaviour {
         Vector3 MultipliedAxis = new Vector3(Axis.x * MovementPower, Axis.y * MovementPower, 0); 
         Vector3 MovedPosition = new Vector3(transform.position.x + MultipliedAxis.x, transform.position.y + MultipliedAxis.y, 0);
         transform.position = MovedPosition;
+        LeftEnergy -= 0.5f;
+    }
+    public void OnTriggerEnter2D(Collider2D Collider) {
+        StandingOn = Collider.gameObject;
+    } public void OnTriggerExit2D(Collider2D Collider) {
+        StandingOn = null;
     }
     public void Charge() {
-        Debug.Log("Charging On" + DefineSurfaceID());
+        if (DefineSurfaceID() == "Charger") {
+            LeftEnergy = 20;
+        }
     }
-
     string DefineSurfaceID() {
-        return "";
+        string returnText = "";
+        if (StandingOn != null) {
+            returnText = StandingOn.name;
+        }
+        return returnText;
     }
 }
