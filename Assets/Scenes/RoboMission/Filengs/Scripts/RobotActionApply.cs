@@ -26,8 +26,10 @@ public class RobotActionApply : MonoBehaviour {
     }
 
     IEnumerator SendRequest(RobotActions Command, string Supplier) {
+        float energyRatio = Brain.LeftEnergy / Brain.MaxEnergy;
+        float speedFactor = Mathf.Lerp(5f, 0.05f, energyRatio);
         isComplitingCommand = true;
-        yield return new WaitForSeconds(CommandComplitionDelay);
+        yield return new WaitForSeconds(CommandComplitionDelay * speedFactor);
         switch (Command) {
             case RobotActions.Move:
                 Brain.Move(Supplier);

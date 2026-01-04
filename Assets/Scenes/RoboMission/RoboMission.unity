@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373a5318a290d484690a4d982327f73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftEnergy: 20
+  LeftEnergy: 10
   MovementPower: 1
 --- !u!114 &2070485057
 MonoBehaviour:

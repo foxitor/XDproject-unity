@@ -1,8 +1,12 @@
 using System.Collections; using System.Collections.Generic; using UnityEngine;
 
 public class RobotBrain : MonoBehaviour {
-    public float LeftEnergy; public float MovementPower = 1f;
+    public float LeftEnergy, MaxEnergy; public float MovementPower = 1f;
     GameObject StandingOn;
+
+    void Start() {
+        MaxEnergy = LeftEnergy;
+    }
     public void Move(string Direction) {
         Vector3 Axis = Vector3.zero;
         switch (Direction) {
@@ -26,7 +30,7 @@ public class RobotBrain : MonoBehaviour {
     }
     public void Charge() {
         if (DefineSurfaceID() == "Charger") {
-            LeftEnergy = 20;
+            LeftEnergy = MaxEnergy;
         }
     }
     string DefineSurfaceID() {
