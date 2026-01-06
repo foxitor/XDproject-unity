@@ -17,6 +17,17 @@ public class GamManag : MonoBehaviour {
     string Tajkost; public float DifficultyPowerMultiplier;
     public GameObject Music;
     public ChertGameAttributes Attributaje; public ChertSeasonalFeatures SeasonManage;
+    ChertoletControls Controls;
+
+    //GamePad
+    void Awake() { 
+        Controls = new ChertoletControls();
+        Controls.GamePlay.Simbit.performed += Ctx => Simbit();
+    }
+    void OnEnable() { Controls.GamePlay.Enable();} 
+    void OnDisable() { Controls.GamePlay.Disable(); }
+    //-
+
 
     public void SetupConfiguredDifficulty(float Power, int LapQuota, float LapLength, string DisplayText, string Feature) {
         DifficultyPowerMultiplier = Power; MaxLaps = LapQuota; LoopTime = LapLength; Tajkost = DisplayText;
@@ -31,19 +42,15 @@ public class GamManag : MonoBehaviour {
         SeasonManage.DefineSeason();
     }
     void Update() {
-        if (!ended){
+        if (!ended) {
             CurTime += Time.deltaTime;
             if (Laps >= MaxLaps && !endOneShot) {
                 Attributaje.EndSession(); ended = true; endOneShot = true;
                 Chertolet.Move = false;
             }
         } else {
-            if (Input.GetKeyDown(KeyCode.Return)) {
-                SceneManager.LoadScene("Chertolet");
-            }
-        } if (Input.GetKeyDown(KeyCode.Escape)) {
-                SceneManager.LoadScene("Chertolet");
-        }
+            if (Input.GetKeyDown(KeyCode.Return)) { ReloadScene(); }
+        } if (Input.GetKeyDown(KeyCode.Escape)) { ReloadScene(); }
         timeText.text = CurTime.ToString("F1") + " сек. чертолётсвтва; " + ((Laps - MaxLaps) * -1) + "км До точки тулла;" +
         " ПОТУЖНОСТЬ : " + Tajkost;
         if (CurTime > LoopTime && CurTime < LoopTime + 1) {
@@ -64,6 +71,12 @@ public class GamManag : MonoBehaviour {
         }
         if (CurrentEvent == "Pitux" && Tajkost != "Тяжко.") { DoPPspawn = false; } else { DoPPspawn = true; }
         HandleEvent();
+    }
+    void ReloadScene() {
+        SceneManager.LoadScene("Chertolet");
+    }
+    void Simbit() {
+        if (ended) ReloadScene();
     }
     IEnumerator HidePitux() { yield return new WaitForSeconds(3); PituxImg.SetActive(false); PituxsHat.SetActive(false); }
     IEnumerator HideCum() { yield return new WaitForSeconds(3); CumImg.SetActive(false); }

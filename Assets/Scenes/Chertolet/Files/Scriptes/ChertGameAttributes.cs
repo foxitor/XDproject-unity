@@ -1,4 +1,5 @@
 using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.UI; using UnityEngine.Video;
+using UnityEngine.InputSystem; using UnityEngine.SceneManagement;
 
 public class ChertGameAttributes : MonoBehaviour {
     //#Rank
@@ -20,12 +21,26 @@ public class ChertGameAttributes : MonoBehaviour {
     //#Ending
     public Text EndingText; 
     int PossibleEndings = 6;
+
+    //#Controlls
+    ChertoletControls Controls;
     [Space]
     //#Other References
     public GamManag Game;
+    bool inGame;
 
-    void Start() {
-        //
+    //GamePad
+    void Awake() { 
+        Controls = new ChertoletControls();
+        Controls.GamePlay.Exit.performed += Ctx => Menu();
+    }
+    void OnEnable() { Controls.GamePlay.Enable();} 
+    void OnDisable() { Controls.GamePlay.Disable(); }
+    //-
+    void Menu() {
+        if (!inGame) {
+            SceneManager.LoadScene("Menu");
+        } else { SceneManager.LoadScene("Chertolet"); }
     }
 
     public void InsertWearable() {
@@ -58,6 +73,7 @@ public class ChertGameAttributes : MonoBehaviour {
             case Difficulties.Unassigned : ConfiguredPowerMultiplier = 0.5f; ConfiguredLapQuota = 1; ConfiguredLapLength = 3f; break;
         }
         Game.SetupConfiguredDifficulty(ConfiguredPowerMultiplier, ConfiguredLapQuota, ConfiguredLapLength, DifficultyDisplay, DifficultyFeature);
+        inGame = true;
     }
 
     public void EndSession() {
@@ -180,9 +196,10 @@ public class ChertGameAttributes : MonoBehaviour {
                 case 6 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment; 
                 RawVideoPlayer.SetActive(true);
                 RankingVidPlayer.gameObject.SetActive(true); break;
-                case 7 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment + "\n\nEnter что бы выйти"; break;
+                case 7 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment + "\n\nEnter/A что бы выйти"; break;
             }
             yield return new WaitForSeconds(0.75f);
         }
     }
+
 } 
