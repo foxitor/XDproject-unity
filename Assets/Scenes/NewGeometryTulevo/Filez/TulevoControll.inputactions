@@ -1,32 +1,23 @@
 {
-    "name": "ChertoletControls",
+    "name": "TulevoControll",
     "maps": [
         {
-            "name": "GamePlay",
-            "id": "e70b6012-1cc2-4f15-a1b8-2d6bfbeaa856",
+            "name": "Gameplay",
+            "id": "8b5fa208-cb90-4451-9e5c-12d683b02bda",
             "actions": [
                 {
                     "name": "Impulse",
                     "type": "Button",
-                    "id": "00441e31-03c4-4cb3-ba54-736b308d0856",
+                    "id": "bd705213-a730-427a-9133-a53ca444e140",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Simbit",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "ab3227ad-de07-49d3-bc37-d54bfa5c56a6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Exit",
-                    "type": "Button",
-                    "id": "6f70a01c-fab7-4127-b378-1531fafbee2d",
+                    "id": "e06796d5-9a28-40fc-a482-db285437696e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -36,7 +27,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "031e4ba3-95b1-479b-8af3-dfe1374a952a",
+                    "id": "fcdec085-584d-4614-9dec-443610ea7e44",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
@@ -47,7 +38,7 @@
                 },
                 {
                     "name": "",
-                    "id": "d6ff5a41-b841-4ab0-b982-8693df795af5",
+                    "id": "bc4e1a8d-953b-4eef-b10b-7c6132522cce",
                     "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
@@ -58,23 +49,23 @@
                 },
                 {
                     "name": "",
-                    "id": "7e2e1c8b-255a-459e-9046-acaa859ddae2",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "38288f5b-5c90-460e-9f17-5f0300ce6c26",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Simbit",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a0695092-6976-4349-8795-3a02818bd080",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "b12d61e3-5b6f-4b9e-a9b6-87d81aa84fc9",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Exit",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

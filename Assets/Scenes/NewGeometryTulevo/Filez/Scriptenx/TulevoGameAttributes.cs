@@ -17,15 +17,29 @@ public class TulevoGameAttributes : MonoBehaviour {
     Difficulties Difficulty;
     [Space]
 
+    //#Controlls
+    ChertoletControls Controls;
+
     //#Ending
     public Text EndingText; 
     int PossibleEndings = 6;
     [Space]
     //#Other References
     public TulevoGame Game;
+    bool inGame;
 
-    void Start() {
-        //
+    //GamePad
+    void Awake() { 
+        Controls = new ChertoletControls();
+        Controls.GamePlay.Exit.performed += Ctx => Menu();
+    }
+    void OnEnable() { Controls.GamePlay.Enable();} 
+    void OnDisable() { Controls.GamePlay.Disable(); }
+    //-
+    void Menu() {
+        if (!inGame) {
+            SceneManager.LoadScene("Menu");
+        } else { SceneManager.LoadScene("Chertolet"); }
     }
 
     public void InsertWearable() {

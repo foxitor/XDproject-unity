@@ -3,18 +3,18 @@ using UnityEngine; using UnityEngine.InputSystem;
 public class ChertSkinModifier : MonoBehaviour {
     public bool LastSkin, Achived, InUse; private GameObject Select;
     public string PPrefName; public Sprite Skin;
-    ChertoletControls Controls;
+    WearablesControlls WControls;
 
     //GamePad
     void Awake() { 
-        Controls = new ChertoletControls();
-        Controls.Wearables.Wearable1.performed += Ctx => SelectThis(1);
-        Controls.Wearables.Wearable2.performed += Ctx => SelectThis(2);
-        Controls.Wearables.Wearable3.performed += Ctx => SelectThis(3);
-        Controls.Wearables.Wearable4.performed += Ctx => SelectThis(4);
+        WControls = new WearablesControlls();
+        WControls.Wearables.Wearable1.performed += Ctx => SelectThis(1);
+        WControls.Wearables.Wearable2.performed += Ctx => SelectThis(2);
+        WControls.Wearables.Wearable3.performed += Ctx => SelectThis(3);
+        WControls.Wearables.Wearable4.performed += Ctx => SelectThis(4);
     }
-    void OnEnable() { Controls.Wearables.Enable();} 
-    void OnDisable() { Controls.Wearables.Disable(); }
+    void OnEnable() { WControls.Wearables.Enable();} 
+    void OnDisable() { WControls.Wearables.Disable(); }
     //-
     void SelectThis(int Child) {
         Transform parentTransform = transform.parent;
