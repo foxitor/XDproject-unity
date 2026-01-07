@@ -64425,6 +64425,10 @@ MonoBehaviour:
   GroundCheckRadius: 0.05
   CheerMsg: {fileID: 940700636}
   DeathSound: {fileID: 8300000, guid: 86ae53c4e4d30904d9bb83318c3c73a2, type: 3}
+  DashClips:
+  - {fileID: 8300000, guid: c2a666f77e8b82045ad4f5e5a7009621, type: 3}
+  - {fileID: 8300000, guid: 742392bca327b6c4e8700f57e3bd6b1b, type: 3}
+  - {fileID: 8300000, guid: 6dcc8b27eef1ac343af8109c3a7c5dcb, type: 3}
 --- !u!4 &1658439710
 Transform:
   m_ObjectHideFlags: 0

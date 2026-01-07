@@ -36,7 +36,8 @@ public class ShigimaJumpalka : MonoBehaviour {
     //GamePad
     void Awake() { 
         Controls = new TulevoControll();
-        Controls.Gameplay.Impulse.performed += Ctx => ImpulseJump(true);
+        //Controls.Gameplay.Impulse.performed += Ctx => ImpulseJump(true);
+        //Controls.Gameplay.Dash.performed += Ctx => StartCoroutine(Dash());
     }
     void OnEnable() { Controls.Gameplay.Enable();} 
     void OnDisable() { Controls.Gameplay.Disable(); }
@@ -107,7 +108,14 @@ public class ShigimaJumpalka : MonoBehaviour {
     }
     void ManageJumpos() {
         if (DoMove) {
-            if (Controls.Gameplay.Impulse.ReadValue<float>() > 0) { ImpulseJump(true); }
+            if (Controls.Gameplay.Impulse.ReadValue<float>() > 0) { 
+                if (!FrontObsticale && CurBox == null) { 
+                        ImpulseJump(true); if (OrbActive) { ImpulseJump(false); } 
+                    } else if (CurBox != null) {
+                    CurBox.GetComponent<TulevoObjectModifier>().OpenBox();
+                    CurBox = null;
+                } 
+            }
             if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))) {
                 if (!FrontObsticale && CurBox == null) {
                     ImpulseJump(true);
@@ -123,6 +131,7 @@ public class ShigimaJumpalka : MonoBehaviour {
                 }
             }
             if (SuperPowered) {
+                if (Controls.Gameplay.Dash.ReadValue<float>() > 0) { if (DashCoolDown <= 0) { StartCoroutine(Dash()); } }
                 if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Z)) {
                     if (DashCoolDown <= 0) {
                         StartCoroutine(Dash());
@@ -132,6 +141,8 @@ public class ShigimaJumpalka : MonoBehaviour {
         }
     } public void ImpulseJump(bool checkGround = false) {
         if (checkGround && grounded) {
+            rb.velocity = Vector2.zero; rb.AddForce(Vector2.up * (JumpStreingth) * Gravity, ForceMode2D.Impulse);
+        } else if (!checkGround) {
             rb.velocity = Vector2.zero; rb.AddForce(Vector2.up * (JumpStreingth) * Gravity, ForceMode2D.Impulse);
         }
     }
