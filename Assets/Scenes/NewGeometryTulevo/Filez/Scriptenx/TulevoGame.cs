@@ -28,6 +28,18 @@ public class TulevoGame : MonoBehaviour {
     public TulevoObjectModifier[] Boxes;
     public GameObject[] BoxLoot;
 
+    //#Controlls
+    TulevoControll Controls;
+
+    //GamePad
+    void Awake() { 
+        Controls = new TulevoControll();
+        Controls.Gameplay.Music.performed += Ctx => RandomizeMusic();
+    }
+    void OnEnable() { Controls.Gameplay.Enable();} 
+    void OnDisable() { Controls.Gameplay.Disable(); }
+    //-
+
     void Start() {
         startGuide.SetActive(true);
         StartCoroutine(HideGuide());
@@ -72,9 +84,7 @@ public class TulevoGame : MonoBehaviour {
         } 
         
         if (Input.GetKeyDown(KeyCode.F)) {
-            Music.Stop();
-            Music.clip = RandomMusics[Random.Range(0, RandomMusics.Length)];
-            Music.Play();
+            RandomizeMusic();
         }
     }
     IEnumerator HideGuide() {
@@ -84,5 +94,10 @@ public class TulevoGame : MonoBehaviour {
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
         }
+    }
+    void RandomizeMusic() {
+        Music.Stop();
+        Music.clip = RandomMusics[Random.Range(0, RandomMusics.Length)];
+        Music.Play();
     }
 }

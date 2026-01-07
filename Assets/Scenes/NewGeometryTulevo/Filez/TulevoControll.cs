@@ -44,6 +44,15 @@ public partial class @TulevoControll: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Music"",
+                    ""type"": ""Button"",
+                    ""id"": ""c53bc871-38c1-42b9-87bd-52fdd120c73d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -90,6 +99,17 @@ public partial class @TulevoControll: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d12d444e-3a03-4bce-b4c2-6d93eef937e9"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Music"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -100,6 +120,7 @@ public partial class @TulevoControll: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Impulse = m_Gameplay.FindAction("Impulse", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_Music = m_Gameplay.FindAction("Music", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,12 +184,14 @@ public partial class @TulevoControll: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Impulse;
     private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_Music;
     public struct GameplayActions
     {
         private @TulevoControll m_Wrapper;
         public GameplayActions(@TulevoControll wrapper) { m_Wrapper = wrapper; }
         public InputAction @Impulse => m_Wrapper.m_Gameplay_Impulse;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @Music => m_Wrapper.m_Gameplay_Music;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -184,6 +207,9 @@ public partial class @TulevoControll: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @Music.started += instance.OnMusic;
+            @Music.performed += instance.OnMusic;
+            @Music.canceled += instance.OnMusic;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -194,6 +220,9 @@ public partial class @TulevoControll: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @Music.started -= instance.OnMusic;
+            @Music.performed -= instance.OnMusic;
+            @Music.canceled -= instance.OnMusic;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -215,5 +244,6 @@ public partial class @TulevoControll: IInputActionCollection2, IDisposable
     {
         void OnImpulse(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnMusic(InputAction.CallbackContext context);
     }
 }

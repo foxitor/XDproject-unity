@@ -28,8 +28,22 @@ public class ShigimaJumpalka : MonoBehaviour {
     //#Death
     bool oneShotDead = false;
     public AudioClip DeathSound;
+    public AudioClip[] DashClips;
+
+    //#Controlls
+    TulevoControll Controls;
+
+    //GamePad
+    void Awake() { 
+        Controls = new TulevoControll();
+        Controls.Gameplay.Impulse.performed += Ctx => ImpulseJump(true);
+    }
+    void OnEnable() { Controls.Gameplay.Enable();} 
+    void OnDisable() { Controls.Gameplay.Disable(); }
+    //-
 
     void Start() {
+        this.gameObject.AddComponent<AudioSource>();
         ShigimaVisual = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         ShigimaVisualTransform = transform.GetChild(0).transform;
         GameCamera = Game.Attributaje.gameObject.GetComponent<Camera>();
@@ -93,15 +107,11 @@ public class ShigimaJumpalka : MonoBehaviour {
     }
     void ManageJumpos() {
         if (DoMove) {
+            if (Controls.Gameplay.Impulse.ReadValue<float>() > 0) { ImpulseJump(true); }
             if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))) {
                 if (!FrontObsticale && CurBox == null) {
-                    if (grounded) {
-                        rb.velocity = Vector2.zero; rb.AddForce(Vector2.up * (JumpStreingth) * Gravity, ForceMode2D.Impulse);
-                    }
-                    if (OrbActive) {
-                        rb.velocity = Vector2.zero; rb.AddForce(Vector2.up * (JumpStreingth) * Gravity, ForceMode2D.Impulse);
-                        OrbActive = false;
-                    }
+                    ImpulseJump(true);
+                    if (OrbActive) { ImpulseJump(false); OrbActive = false; }
                     if (GravityOrbActive) {
                         rb.velocity = Vector2.zero;
                         Gravity = Gravity == 1 ? -1 : 1; rb.gravityScale = rb.gravityScale * -1;
@@ -120,7 +130,12 @@ public class ShigimaJumpalka : MonoBehaviour {
                 }
             }
         }
-    } public void cheerUp() { CheerMsg.SetActive(true); StartCoroutine(HideCheer()); }
+    } public void ImpulseJump(bool checkGround = false) {
+        if (checkGround && grounded) {
+            rb.velocity = Vector2.zero; rb.AddForce(Vector2.up * (JumpStreingth) * Gravity, ForceMode2D.Impulse);
+        }
+    }
+    public void cheerUp() { CheerMsg.SetActive(true); StartCoroutine(HideCheer()); }
 
     //#interact
     void OnTriggerEnter2D(Collider2D collision) {
@@ -188,6 +203,7 @@ public class ShigimaJumpalka : MonoBehaviour {
         CheerMsg.SetActive(false);
     }
     IEnumerator Dash() {
+        this.GetComponent<AudioSource>().PlayOneShot(DashClips[Random.Range(0, DashClips.Length)]);
         CurrentSpeed = SuperPowerSpeed;
         DashCoolDown = 2.5f; ShigimaVisual.color = DullColor;
         yield return new WaitForSeconds(0.25f);
