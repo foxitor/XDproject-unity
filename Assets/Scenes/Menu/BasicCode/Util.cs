@@ -9,7 +9,3 @@ public enum Seasons {
 public enum Difficulties {
     Easy, Normal, Hard, Unassigned
 }
-
-public class Util : MonoBehaviour {
-    
-}
