@@ -67,6 +67,7 @@ public class TulevoGameAttributes : MonoBehaviour {
             case Difficulties.Unassigned : ConfiguredPowerMultiplier = 0.5f; ConfiguredAmmoQuota = 1; break;
         }
         Game.SetupConfiguredDifficulty(ConfiguredPowerMultiplier, ConfiguredAmmoQuota, DifficultyDisplay);
+        inGame = true;
     }
 
     public void EndSession() {
@@ -179,11 +180,13 @@ public class TulevoGameAttributes : MonoBehaviour {
             string newDifficultyAchivement, string newSeasonAchivement, string specialConditionAdvancment) {
         AudioSource RankSounds = RankScreen.AddComponent<AudioSource>();
         RankSounds.PlayOneShot(RankLabelSounds[0]);
+        Game.Player.VibrateController(0.5f, 0.5f, 0.5f);
         yield return new WaitForSeconds(1.5f);
         BlackScreen.SetActive(false);
         RankSounds.PlayOneShot(RankLabelSounds[1]);
         for (int i = 0; i <= 7; i++) {
             RankSounds.pitch = RankSounds.pitch + 0.025f;
+            Game.Player.VibrateController(0.05f, 0.05f, 0.1f);
             RankSounds.PlayOneShot(RankLabelSounds[i + 2]);
             switch (i) {
                 case 0 : EndingText.text = ""; break;
@@ -195,7 +198,7 @@ public class TulevoGameAttributes : MonoBehaviour {
                 case 6 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment; 
                 RawVideoPlayer.SetActive(true);
                 RankingVidPlayer.gameObject.SetActive(true); break;
-                case 7 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment + "\n\nEnter что бы выйти"; break;
+                case 7 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment + "\n\nEnter/A что бы выйти"; break;
             }
             yield return new WaitForSeconds(0.75f);
         }

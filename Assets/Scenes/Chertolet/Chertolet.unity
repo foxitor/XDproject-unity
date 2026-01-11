@@ -13412,6 +13412,7 @@ MonoBehaviour:
   tiltSmooth: 2
   maxRotation: 30
   minRotation: -30
+  Game: {fileID: 1482675542}
   StartGuideLine: {fileID: 356010979}
   Move: 1
 --- !u!70 &908974346

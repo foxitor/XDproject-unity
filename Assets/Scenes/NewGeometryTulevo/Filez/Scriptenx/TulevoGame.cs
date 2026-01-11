@@ -35,10 +35,20 @@ public class TulevoGame : MonoBehaviour {
     void Awake() { 
         Controls = new TulevoControll();
         Controls.Gameplay.Music.performed += Ctx => RandomizeMusic();
+        Controls.Gameplay.Simbit.performed += Ctx => SimbitGamePad();
     }
     void OnEnable() { Controls.Gameplay.Enable();} 
     void OnDisable() { Controls.Gameplay.Disable(); }
     //-
+
+    void SimbitGamePad() {
+        if (CurRevolverAmmo >= RevolverAmmoGoal && !ended && !PlayerDied) { 
+            Attributaje.EndSession(); ended = true;
+            Player.DoMove = false; 
+        } else if (CurRevolverAmmo >= RevolverAmmoGoal && ended) {
+            ReloadScene();
+        } 
+    }
 
     void Start() {
         startGuide.SetActive(true);
@@ -49,7 +59,7 @@ public class TulevoGame : MonoBehaviour {
 
     public void SetupConfiguredDifficulty(float Power, int BulletQuota, string DisplayText) {
         DifficultyPowerMultiplier = Power; Tajkost = DisplayText; RevolverAmmoGoal = BulletQuota;
-        Debug.Log(Tajkost);
+        //Debug.Log(Tajkost);
     }
     public int ShareSearchedLayer() {
         return layersSearched;
@@ -71,7 +81,7 @@ public class TulevoGame : MonoBehaviour {
     }
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            SceneManager.LoadScene("NewGeometryTulevo");
+            ReloadScene();
         }
         StatText.text = (" Патронов найдено : " + CurRevolverAmmo + "/" + RevolverAmmoGoal + "\n Слоёв обыскано : " + layersSearched); 
 
@@ -80,7 +90,7 @@ public class TulevoGame : MonoBehaviour {
             Attributaje.EndSession(); ended = true;
             Player.DoMove = false;
         } else if (Input.GetKeyDown(KeyCode.Return) && CurRevolverAmmo >= RevolverAmmoGoal && ended) {
-            SceneManager.LoadScene("NewGeometryTulevo");
+            ReloadScene();
         } 
         
         if (Input.GetKeyDown(KeyCode.F)) {
@@ -89,11 +99,10 @@ public class TulevoGame : MonoBehaviour {
     }
     IEnumerator HideGuide() {
         yield return new WaitForSeconds(3); startGuide.SetActive(false);
-    } public void RestartScene() {
-        if (!ended) {
-            Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.name);
-        }
+    } public void ReloadScene() {
+        if(!ended)
+        Player.StopVibration();
+        SceneManager.LoadScene("NewGeometryTulevo");
     }
     void RandomizeMusic() {
         Music.Stop();

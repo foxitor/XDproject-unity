@@ -1,4 +1,5 @@
 using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.UI; using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class EgoricalGameAttributes : MonoBehaviour {
     //#Rank
@@ -28,8 +29,22 @@ public class EgoricalGameAttributes : MonoBehaviour {
     public AudioClip CrazySigimaS;
     public AudioSource EndGameFeatureSource;
 
-    void Start() {
-        //
+    //#Controlls
+    JungleFightControlls Controls;
+    bool inGame;
+
+    //GamePad
+    void Awake() { 
+        Controls = new JungleFightControlls();
+        Controls.Gameplay.Exit.performed += Ctx => Menu();
+    }
+    void OnEnable() { Controls.Gameplay.Enable();} 
+    void OnDisable() { Controls.Gameplay.Disable(); }
+    //-
+    void Menu() {
+        if (!inGame) {
+            SceneManager.LoadScene("Menu");
+        } else { SceneManager.LoadScene("NewJungleFight"); }
     }
 
     public void InsertWearable() {
@@ -57,6 +72,7 @@ public class EgoricalGameAttributes : MonoBehaviour {
             case Difficulties.Unassigned : ConfiguredPowerMultiplier = 0.5f; ConfiguredLapQuota = 1; ConfiguredLapLength = 3f; ConfiguredSnakeFreq = 3f; break;
         }
         Game.SetupConfiguredDifficulty(ConfiguredPowerMultiplier, ConfiguredLapQuota, ConfiguredLapLength, ConfiguredKillQuota, DifficultyDisplay, ConfiguredSnakeFreq, DifficultyFeature);
+        inGame = true;
     }
 
     public void EndSession() {
@@ -176,10 +192,12 @@ public class EgoricalGameAttributes : MonoBehaviour {
             string newDifficultyAchivement, string newSeasonAchivement, string specialConditionAdvancment) {
         AudioSource RankSounds = RankScreen.AddComponent<AudioSource>();
         RankSounds.PlayOneShot(RankLabelSounds[0]);
+        Game.Player.VibrateController(0.5f, 0.5f, 0.5f);
         yield return new WaitForSeconds(1.5f);
         BlackScreen.SetActive(false);
         RankSounds.PlayOneShot(RankLabelSounds[1]);
         for (int i = 0; i <= 7; i++) {
+            Game.Player.VibrateController(0.05f, 0.05f, 0.1f);
             RankSounds.pitch = RankSounds.pitch + 0.025f;
             RankSounds.PlayOneShot(RankLabelSounds[i + 2]);
             switch (i) {
@@ -192,7 +210,7 @@ public class EgoricalGameAttributes : MonoBehaviour {
                 case 6 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment; 
                 RawVideoPlayer.SetActive(true);
                 RankingVidPlayer.gameObject.SetActive(true); break;
-                case 7 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment + "\n\nEnter что бы выйти"; break;
+                case 7 : EndingText.text = "Результаты Забега :\nКонцовка : " + DefineEndVariant(EndingIndex) + "\n\n" + newEndingAchivement + "\n" + newDifficultyAchivement + "\n" + newSeasonAchivement + "\n" + specialConditionAdvancment + "\n\nEnter/A что бы выйти"; break;
             }
             yield return new WaitForSeconds(0.75f);
         }

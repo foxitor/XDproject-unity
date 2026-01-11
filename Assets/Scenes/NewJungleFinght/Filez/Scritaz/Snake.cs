@@ -18,6 +18,7 @@ public class Snake : MonoBehaviour {
         if (collision.gameObject.CompareTag("Kill")) {
             GameSetting.playSnakeSound(KilledSound);
             GameSetting.Kills++; Destroy(this.gameObject);
+            GameSetting.Player.VibrateController(0.15f, 0.15f, 0.05f);
         } if (collision.gameObject.CompareTag("Player")) {
             collision.gameObject.GetComponent<Zmeestradales>().Damage(); Destroy(this.gameObject);
         } if (collision.gameObject.CompareTag("Respawn")) {

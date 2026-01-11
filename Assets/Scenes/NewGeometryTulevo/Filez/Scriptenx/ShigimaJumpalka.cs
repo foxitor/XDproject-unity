@@ -1,4 +1,4 @@
-using System.Collections; using System.Collections.Generic; using UnityEngine;
+using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.InputSystem;
 
 public class ShigimaJumpalka : MonoBehaviour {
     public TulevoGame Game;
@@ -31,7 +31,7 @@ public class ShigimaJumpalka : MonoBehaviour {
     public AudioClip[] DashClips;
 
     //#Controlls
-    TulevoControll Controls;
+    TulevoControll Controls; Gamepad gamepad;
 
     //GamePad
     void Awake() { 
@@ -44,6 +44,7 @@ public class ShigimaJumpalka : MonoBehaviour {
     //-
 
     void Start() {
+        gamepad = Gamepad.current;
         this.gameObject.AddComponent<AudioSource>();
         ShigimaVisual = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         ShigimaVisualTransform = transform.GetChild(0).transform;
@@ -70,7 +71,7 @@ public class ShigimaJumpalka : MonoBehaviour {
         } if (!grounded) {
             float FinalRotation = 0;
             if (!Direction && Gravity == 1) { FinalRotation = RotateSpeed; }
-            if (!Direction && Gravity == -1) { FinalRotation = RotateSpeed; }
+            if (!Direction && Gravity == -1) { FinalRotation = -RotateSpeed; }
             if (Direction && Gravity == -1) { FinalRotation = RotateSpeed; }
             if (Direction && Gravity == 1) { FinalRotation = -RotateSpeed; }
             ShigimaVisualTransform.Rotate(0, 0, FinalRotation * Time.deltaTime);
@@ -110,7 +111,14 @@ public class ShigimaJumpalka : MonoBehaviour {
         if (DoMove) {
             if (Controls.Gameplay.Impulse.ReadValue<float>() > 0) { 
                 if (!FrontObsticale && CurBox == null) { 
-                        ImpulseJump(true); if (OrbActive) { ImpulseJump(false); } 
+                        ImpulseJump(true); 
+                        if (OrbActive) { VibrateController(0.025f, 0.025f, 0.1f); ImpulseJump(false); } 
+                        if (GravityOrbActive) {
+                            VibrateController(0.025f, 0.025f, 0.1f);
+                            rb.velocity = Vector2.zero;
+                            Gravity = Gravity == 1 ? -1 : 1; rb.gravityScale = rb.gravityScale * -1;
+                            GravityOrbActive = false;
+                        } 
                     } else if (CurBox != null) {
                     CurBox.GetComponent<TulevoObjectModifier>().OpenBox();
                     CurBox = null;
@@ -119,8 +127,9 @@ public class ShigimaJumpalka : MonoBehaviour {
             if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))) {
                 if (!FrontObsticale && CurBox == null) {
                     ImpulseJump(true);
-                    if (OrbActive) { ImpulseJump(false); OrbActive = false; }
+                    if (OrbActive) { VibrateController(0.025f, 0.025f, 0.1f); ImpulseJump(false); OrbActive = false; }
                     if (GravityOrbActive) {
+                        VibrateController(0.025f, 0.025f, 0.1f);
                         rb.velocity = Vector2.zero;
                         Gravity = Gravity == 1 ? -1 : 1; rb.gravityScale = rb.gravityScale * -1;
                         GravityOrbActive = false;
@@ -146,7 +155,7 @@ public class ShigimaJumpalka : MonoBehaviour {
             rb.velocity = Vector2.zero; rb.AddForce(Vector2.up * (JumpStreingth) * Gravity, ForceMode2D.Impulse);
         }
     }
-    public void cheerUp() { CheerMsg.SetActive(true); StartCoroutine(HideCheer()); }
+    public void cheerUp() { CheerMsg.SetActive(true); StartCoroutine(HideCheer()); VibrateController(0.05f, 0.05f, 0.1f); }
 
     //#interact
     void OnTriggerEnter2D(Collider2D collision) {
@@ -217,6 +226,7 @@ public class ShigimaJumpalka : MonoBehaviour {
         this.GetComponent<AudioSource>().PlayOneShot(DashClips[Random.Range(0, DashClips.Length)]);
         CurrentSpeed = SuperPowerSpeed;
         DashCoolDown = 2.5f; ShigimaVisual.color = DullColor;
+        VibrateController(0.25f, 0.25f, 0.25f);
         yield return new WaitForSeconds(0.25f);
         CurrentSpeed = DefaultSpeed;
     }
@@ -224,7 +234,14 @@ public class ShigimaJumpalka : MonoBehaviour {
         rb.bodyType = RigidbodyType2D.Static; Game.Music.Stop();
         DoMove = false; Game.DeadMessange.SetActive(true);
         Game.Music.clip = DeathSound; Game.Music.Play();
+        VibrateController(0.2f, 0.2f, 0.5f);
         yield return new WaitForSeconds(2.5f);
-        Game.RestartScene();
+        Game.ReloadScene();
     } 
+    public void VibrateController(float leftMotor, float rightMotor, float duration) {
+        if (gamepad != null) { gamepad.SetMotorSpeeds(leftMotor, rightMotor); Invoke("StopVibration", duration); }
+    }
+    public void StopVibration() {
+        if (gamepad != null) { gamepad.SetMotorSpeeds(0, 0); }
+    }
 }

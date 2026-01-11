@@ -54,6 +54,7 @@ public class GamManag : MonoBehaviour {
         timeText.text = CurTime.ToString("F1") + " сек. чертолётсвтва; " + ((Laps - MaxLaps) * -1) + "км До точки тулла;" +
         " ПОТУЖНОСТЬ : " + Tajkost;
         if (CurTime > LoopTime && CurTime < LoopTime + 1) {
+            Chertolet.VibrateController(0.25f, 0.25f, 0.1f);
             int randomings = Random.Range(0,5); CurTime = 0; 
             bool onetab = false; Laps++;
 
@@ -72,7 +73,8 @@ public class GamManag : MonoBehaviour {
         if (CurrentEvent == "Pitux" && Tajkost != "Тяжко.") { DoPPspawn = false; } else { DoPPspawn = true; }
         HandleEvent();
     }
-    void ReloadScene() {
+    public void ReloadScene() {
+        Chertolet.StopVibration();
         SceneManager.LoadScene("Chertolet");
     }
     void Simbit() {

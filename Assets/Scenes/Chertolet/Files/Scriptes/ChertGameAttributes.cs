@@ -180,10 +180,12 @@ public class ChertGameAttributes : MonoBehaviour {
             string newDifficultyAchivement, string newSeasonAchivement, string specialConditionAdvancment) {
         AudioSource RankSounds = RankScreen.AddComponent<AudioSource>();
         RankSounds.PlayOneShot(RankLabelSounds[0]);
+        Game.Chertolet.VibrateController(0.5f, 0.5f, 0.5f);
         yield return new WaitForSeconds(1.5f);
         BlackScreen.SetActive(false);
         RankSounds.PlayOneShot(RankLabelSounds[1]);
         for (int i = 0; i <= 7; i++) {
+            Game.Chertolet.VibrateController(0.05f, 0.05f, 0.1f);
             RankSounds.pitch = RankSounds.pitch + 0.025f;
             RankSounds.PlayOneShot(RankLabelSounds[i + 2]);
             switch (i) {

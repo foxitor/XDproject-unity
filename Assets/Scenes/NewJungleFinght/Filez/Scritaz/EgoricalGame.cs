@@ -26,6 +26,26 @@ public class EgoricalGame : MonoBehaviour {
     public GameObject SnakeInstateiate;
     public Transform[] SnakeSpawns;
     float CurSnakeTime;
+    //#Controlls
+    JungleFightControlls Controls;
+
+    //GamePad
+    void Awake() { 
+        Controls = new JungleFightControlls();
+        Controls.Gameplay.Simbit.performed += Ctx => SimbitGamePad();
+    }
+    void OnEnable() { Controls.Gameplay.Enable();} 
+    void OnDisable() { Controls.Gameplay.Disable(); }
+    //-
+
+    void SimbitGamePad() {
+        if (Kills >= KillQuotaGoal && !ended) { 
+            Attributaje.EndSession(); ended = true;
+            Player.Move = false; SnakesOn = false;
+        } else if (Kills >= KillQuotaGoal && ended) {
+            ReloadScene();
+        } 
+    }
 
     void Start() {
         StartCoroutine(UpgradeStage());
@@ -46,7 +66,7 @@ public class EgoricalGame : MonoBehaviour {
     }
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            SceneManager.LoadScene("NewJungleFight");
+            ReloadScene();
         }
         
         CurTime += Time.deltaTime;
@@ -70,7 +90,7 @@ public class EgoricalGame : MonoBehaviour {
             Attributaje.EndSession(); ended = true;
             Player.Move = false; SnakesOn = false;
         } else if (Input.GetKeyDown(KeyCode.Return) && Kills >= KillQuotaGoal && ended) {
-            SceneManager.LoadScene("NewJungleFight");
+            ReloadScene();
         }
     }
     void SpawnSnakes() { 
@@ -94,5 +114,9 @@ public class EgoricalGame : MonoBehaviour {
     }
     public void playSnakeSound(AudioClip Sound) {
         SnakeSounds.PlayOneShot(Sound);
+    }
+    public void ReloadScene() {
+        Player.StopVibration();
+        SceneManager.LoadScene("NewJungleFight");
     }
 }
