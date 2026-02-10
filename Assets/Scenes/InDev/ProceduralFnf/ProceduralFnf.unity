@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2736af2f048a3a842acc8bfc61b11117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MicroGame: 1
+  MicroGame: 0
   bpm: 85
   ScrollSpeed: 3.5
   Hud: {fileID: 1842589887}

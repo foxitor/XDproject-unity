@@ -1,4 +1,6 @@
 public enum RobotActions {
     Move,
-    Charge
+    Charge,
+    Look,
+    ShockWave
 }

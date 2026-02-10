@@ -1,7 +1,7 @@
 using System.Collections.Generic; using UnityEngine; using System.Collections;
 
 public class RobotActionApply : MonoBehaviour {
-    public CommandInput Console;
+    public GameObject ConsoleGroup;
     public RobotBrain Brain; 
     public float CommandComplitionDelay;
     //#comandHelding
@@ -15,7 +15,7 @@ public class RobotActionApply : MonoBehaviour {
         }
     }
     void Update() {
-        Console.gameObject.SetActive(!isComplitingCommand);
+        ConsoleGroup.SetActive(!isComplitingCommand);
     }
 
     IEnumerator ProcessNextCommand() {
@@ -29,13 +29,19 @@ public class RobotActionApply : MonoBehaviour {
         float energyRatio = Brain.LeftEnergy / Brain.MaxEnergy;
         float speedFactor = Mathf.Lerp(5f, 0.05f, energyRatio);
         isComplitingCommand = true;
-        yield return new WaitForSeconds(CommandComplitionDelay * speedFactor);
+        yield return new WaitForSeconds(CommandComplitionDelay * speedFactor + 0.5f);
         switch (Command) {
             case RobotActions.Move:
                 Brain.Move(Supplier);
                 break;
             case RobotActions.Charge:
                 Brain.Charge();
+                break;
+            case RobotActions.Look:
+                Brain.Look(Supplier);
+                break;
+            case RobotActions.ShockWave:
+                Brain.ShockWave(int.Parse(Supplier));
                 break;
             default:
                 Debug.Log("'FalseCall' to the action script.");

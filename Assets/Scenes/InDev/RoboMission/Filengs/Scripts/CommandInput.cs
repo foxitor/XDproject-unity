@@ -18,6 +18,18 @@ public class CommandInput : MonoBehaviour {
                 string direction = command.Substring(startIdx, endIdx - startIdx);
                 RobotActionMaking.ApplyAction(RobotActions.Move, direction);
             }
+            else if (command.StartsWith("look(") && command.EndsWith(")")) {
+                int startIdx = command.IndexOf('(') + 1;
+                int endIdx = command.IndexOf(')');
+                string direction = command.Substring(startIdx, endIdx - startIdx);
+                RobotActionMaking.ApplyAction(RobotActions.Look, direction);
+            }
+            else if (command.StartsWith("shock(") && command.EndsWith(")")) {
+                int startIdx = command.IndexOf('(') + 1;
+                int endIdx = command.IndexOf(')');
+                string PowerSupply = command.Substring(startIdx, endIdx - startIdx);
+                RobotActionMaking.ApplyAction(RobotActions.ShockWave, PowerSupply);
+            }
             else if (command == "charge()") {
                 RobotActionMaking.ApplyAction(RobotActions.Charge, "");
             }
