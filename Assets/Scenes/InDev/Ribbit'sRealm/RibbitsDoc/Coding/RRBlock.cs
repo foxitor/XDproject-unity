@@ -46,7 +46,5 @@ public class RRBlock : MonoBehaviour {
             this.gameObject.GetComponent<MeshFilter>().mesh = BlockLib.BlockMeshes[0];
         }
     }
-    void TextureBlock(int TexturalIndex) {
-        this.gameObject.GetComponent<Renderer>().material = BlockLib.BlockMaterials[TexturalIndex]; 
-    }
+    void TextureBlock(int TexturalIndex) { this.gameObject.GetComponent<Renderer>().material = BlockLib.BlockMaterials[TexturalIndex]; }
 }

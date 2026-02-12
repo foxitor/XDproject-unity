@@ -41,18 +41,10 @@ public class RRTicking : MonoBehaviour {
     }
     void ManageTickFunc() {
         SendToSubs(TickTypes.volume_every);
-        if (CurrentTick % 4 == 0) {
-            SendToSubs(TickTypes.volume_common);
-        }
-        if (CurrentTick % 8 == 0) {
-            SendToSubs(TickTypes.volume_uncomon);
-        }
-        if (CurrentTick % 10 == 0) {
-            SendToSubs(TickTypes.volume_rare);
-        }
-        if (CurrentTick % 20 == 0) {
-            SendToSubs(TickTypes.volume_second);
-        }
+        if (CurrentTick % 4 == 0) { SendToSubs(TickTypes.volume_common); }
+        if (CurrentTick % 8 == 0) { SendToSubs(TickTypes.volume_uncomon); }
+        if (CurrentTick % 10 == 0) { SendToSubs(TickTypes.volume_rare); }
+        if (CurrentTick % 20 == 0) { SendToSubs(TickTypes.volume_second); }
     }
     void SendToSubs(TickTypes tickTpye) {
         foreach (TickSubscriber sub in Subscribed) {
@@ -61,7 +53,5 @@ public class RRTicking : MonoBehaviour {
             }
         }
     }
-    public int GetFps() {
-        return Mathf.RoundToInt(currentFps);
-    }
+    public int GetFps() { return Mathf.RoundToInt(currentFps); }
 }
