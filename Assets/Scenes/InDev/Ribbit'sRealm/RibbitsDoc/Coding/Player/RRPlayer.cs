@@ -8,7 +8,7 @@ public class RRPlayer : MonoBehaviour {
 
     Vector2 moveInput; Vector2 lookInput;
     float rotationX = 0f;
-    Vector3 velocity; bool isGrounded;
+    Vector3 velocity; bool isGrounded, isRunning, isCrouching;
 
     void Awake() {
         CharControll = GetComponent<CharacterController>();
@@ -41,8 +41,8 @@ public class RRPlayer : MonoBehaviour {
         isGrounded = CharControll.isGrounded;
         if(!isGrounded) {
             velocity.y += gravity * Time.deltaTime;
-            if (velocity.y > 5) {
-                velocity.y = 5;
+            if (velocity.y > 10) {
+                velocity.y = 10;
             }
         } else { velocity.y = 0; }
     }
@@ -53,6 +53,13 @@ public class RRPlayer : MonoBehaviour {
     }
 
     void HandleMovement() {
+        if (inputActions.Player.Run.ReadValue<float>() > 0) { isRunning = true; } else { isRunning = false; }
+        if (inputActions.Player.Crouch.ReadValue<float>() > 0) { isCrouching = true; } else { isCrouching = false; }
+        float FinalSpeed;
+        if (isRunning) { FinalSpeed = RunSpeed; }
+        else if (isCrouching) { FinalSpeed = CrouchSpeed; }
+        else { FinalSpeed = WalkSpeed; }
+        CurrentSpeed = FinalSpeed;
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y; CharControll.Move(move * CurrentSpeed * Time.deltaTime);
     }
 
