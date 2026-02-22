@@ -2,7 +2,8 @@ using System.Collections; using System.Collections.Generic; using UnityEngine;
 
 public enum Blocks {
     gray_rock,
-    green_rock
+    green_rock,
+    black_rock
 }
 
 public class RRBlockLibrary : MonoBehaviour {

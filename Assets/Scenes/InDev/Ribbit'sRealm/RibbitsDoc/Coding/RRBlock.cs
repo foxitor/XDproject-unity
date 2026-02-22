@@ -1,8 +1,10 @@
-using System.Collections; using System.Collections.Generic; using UnityEngine;
+using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.Rendering;
 
 public class RRBlock : MonoBehaviour {
     public Blocks BlockType;
     Blocks PreviousBlockType;
+
+    Renderer blockRender;
 
     RRParticularLib Particles;
     RRBlockLibrary BlockLib;
@@ -12,6 +14,7 @@ public class RRBlock : MonoBehaviour {
         BlockLib = GameObject.Find("BlockLib").GetComponent<RRBlockLibrary>();
 
         PreviousBlockType = BlockType;
+        blockRender = this.gameObject.GetComponent<Renderer>();
     }
 
     public void onTick(TickTypes tickTpye) {
@@ -21,12 +24,25 @@ public class RRBlock : MonoBehaviour {
                     Instantiate(Particles.ShareParticle("green_rock_spark"), transform.position, transform.rotation, transform);
                 } break;
         }
-        if (tickTpye == TickTypes.volume_every) CheckBlockState(BlockType);
+        if (tickTpye == TickTypes.volume_every) {
+            CheckBlockState(BlockType);
+        }
     }
     void CheckBlockState(Blocks blockType) {
         if (PreviousBlockType != BlockType) {
             RewriteBlock(BlockType);
             PreviousBlockType = BlockType;
+        }
+
+        if (blockRender.isVisible) {
+            blockRender.shadowCastingMode = ShadowCastingMode.On;
+            blockRender.receiveShadows = true;
+            //BlockType = Blocks.gray_rock;
+        } else {
+            blockRender.shadowCastingMode = ShadowCastingMode.Off;
+            blockRender.receiveShadows = false;
+            
+            //BlockType = Blocks.black_rock;
         }
     }
     void RewriteBlock(Blocks newBlockType) {
@@ -39,6 +55,10 @@ public class RRBlock : MonoBehaviour {
                 ShapeObject("Cuboid");
                 TextureBlock(1);
             break;
+            case Blocks.black_rock : 
+                ShapeObject("Cuboid");
+                TextureBlock(2);
+            break;
         }
     }
     void ShapeObject(string Type) {
@@ -46,5 +66,5 @@ public class RRBlock : MonoBehaviour {
             this.gameObject.GetComponent<MeshFilter>().mesh = BlockLib.BlockMeshes[0];
         }
     }
-    void TextureBlock(int TexturalIndex) { this.gameObject.GetComponent<Renderer>().material = BlockLib.BlockMaterials[TexturalIndex]; }
+    void TextureBlock(int TexturalIndex) { blockRender.material = BlockLib.BlockMaterials[TexturalIndex]; }
 }

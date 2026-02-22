@@ -7,6 +7,7 @@ public class RRPlayerModel : MonoBehaviour {
 
     void Start() {
         Player = transform.parent.GetComponent<RRPlayer>();
+        
     }
     void Update() {
         float xRotation = Player.Cam.transform.localEulerAngles.x;

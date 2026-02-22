@@ -1,7 +1,7 @@
 using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.InputSystem;
 
 public class RRPlayer : MonoBehaviour {
-    public float CurrentSpeed = 0f, WalkSpeed = 2.6f, RunSpeed = 3f, CrouchSpeed = 1.6f, mouseSensitivity = 0.1f, gravity = -9.81f;
+    public float CurrentSpeed = 0f, WalkSpeed = 2.6f, RunSpeed = 3f, CrouchSpeed = 1.6f, JumpHeight = 3.5f, mouseSensitivity = 0.1f, gravity = -9.81f;
 
     CharacterController CharControll;
     public Camera Cam; RibbitsRealmInput inputActions;
@@ -48,7 +48,7 @@ public class RRPlayer : MonoBehaviour {
     }
     void Jump() {
         if (isGrounded) {
-            velocity.y = 3f;
+            velocity.y = JumpHeight;
         }
     }
 
