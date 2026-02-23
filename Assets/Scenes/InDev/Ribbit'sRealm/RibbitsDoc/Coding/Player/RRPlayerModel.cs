@@ -2,6 +2,7 @@ using System.Collections; using System.Collections.Generic; using UnityEngine;
 
 public class RRPlayerModel : MonoBehaviour {
     public GameObject[] BodyParts;
+    public GameObject[] FpsBodyParts;
     public float LookBoarder = 30;
     RRPlayer Player;
 
@@ -18,5 +19,9 @@ public class RRPlayerModel : MonoBehaviour {
     
         float clampedX = Mathf.Clamp(xRotation, -LookBoarder, LookBoarder);
         BodyParts[0].transform.localEulerAngles = new Vector3(-clampedX, 0, 0);
+    }
+
+    public void SwingHand(int Hand) {
+        FpsBodyParts[Hand].GetComponent<Animator>().Play("Swing");
     }
 }

@@ -5,6 +5,7 @@ public class RRPlayer : MonoBehaviour {
 
     CharacterController CharControll;
     public Camera Cam; RibbitsRealmInput inputActions;
+    public RRPlayerModel ModelAnimator;
 
     Vector2 moveInput; Vector2 lookInput;
     float rotationX = 0f;
@@ -30,9 +31,9 @@ public class RRPlayer : MonoBehaviour {
 
     void Update() {
         CurrentSpeed = WalkSpeed;
-        if (inputActions.Player.Jump.ReadValue<float>() > 0) {
-            Jump();
-        }
+        if (inputActions.Player.Jump.ReadValue<float>() > 0) { Jump(); }
+
+        if (inputActions.Player.Punch.ReadValue<float>() > 0) { Punch(); }
         HandleMovement(); HandleMouseLook();
         Cursor.lockState = CursorLockMode.Locked;
         CharControll.Move(velocity * Time.deltaTime);
@@ -47,9 +48,10 @@ public class RRPlayer : MonoBehaviour {
         } else { velocity.y = 0; }
     }
     void Jump() {
-        if (isGrounded) {
-            velocity.y = JumpHeight;
-        }
+        if (isGrounded) { velocity.y = JumpHeight; }
+    }
+    void Punch() {
+        ModelAnimator.SwingHand(0);
     }
 
     void HandleMovement() {

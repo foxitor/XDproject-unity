@@ -654,10 +654,11 @@ MonoBehaviour:
   WalkSpeed: 2.6
   RunSpeed: 3
   CrouchSpeed: 1.6
-  JumpHeight: 3.5
+  JumpHeight: 4.1
   mouseSensitivity: 0.1
   gravity: -9.81
   Cam: {fileID: 836658236}
+  ModelAnimator: {fileID: 1892317641}
 --- !u!143 &35004621
 CharacterController:
   m_ObjectHideFlags: 0
@@ -10299,6 +10300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 621064265}
+  - component: {fileID: 621064266}
   m_Layer: 9
   m_Name: right_arm
   m_TagString: Untagged
@@ -10322,6 +10324,28 @@ Transform:
   - {fileID: 637539202}
   m_Father: {fileID: 1762829582}
   m_LocalEulerAnglesHint: {x: -140, y: 30, z: -20}
+--- !u!95 &621064266
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621064264}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 12d5f4daca23adf4dbbf96adccfcf326, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &621185331
 GameObject:
   m_ObjectHideFlags: 0
@@ -16394,13 +16418,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032593902}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!1 &1036009682
 GameObject:
   m_ObjectHideFlags: 0
@@ -28333,6 +28357,8 @@ MonoBehaviour:
   - {fileID: 393030966937005488}
   - {fileID: 8439246840239833153}
   - {fileID: 5001548351764256903}
+  FpsBodyParts:
+  - {fileID: 621064264}
   LookBoarder: 30
 --- !u!1 &1898132312
 GameObject:
