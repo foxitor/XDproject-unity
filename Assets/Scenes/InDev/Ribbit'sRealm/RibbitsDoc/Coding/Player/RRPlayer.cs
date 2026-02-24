@@ -1,15 +1,18 @@
 using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.InputSystem;
 
 public class RRPlayer : MonoBehaviour {
-    public float CurrentSpeed = 0f, WalkSpeed = 2.6f, RunSpeed = 3f, CrouchSpeed = 1.6f, JumpHeight = 3.5f, mouseSensitivity = 0.1f, gravity = -9.81f;
-
+    public float CurrentSpeed = 0f, WalkSpeed = 2.6f, RunSpeed = 3f, CrouchSpeed = 1.6f, JumpHeight = 3.5f, 
+    mouseSensitivity = 0.1f, InteractionLength = 3.6f, InteractionCooldown = 1f, gravity = -9.81f;
     CharacterController CharControll;
     public Camera Cam; RibbitsRealmInput inputActions;
     public RRPlayerModel ModelAnimator;
 
     Vector2 moveInput; Vector2 lookInput;
-    float rotationX = 0f;
+    float rotationX = 0f, curIntractCooldown = 0f;
     Vector3 velocity; bool isGrounded, isRunning, isCrouching;
+    
+    public GameObject yourBlockPrefab;
+    //public RRChunk targetChunk;
 
     void Awake() {
         CharControll = GetComponent<CharacterController>();
@@ -24,6 +27,8 @@ public class RRPlayer : MonoBehaviour {
     }
     void Start() {
         Cam = Camera.main;
+        curIntractCooldown = InteractionCooldown;
+        //Chunker = GameObject.Find("BlockLib").GetComponent<RRChunkManager>();
     }
 
     void OnEnable() { inputActions.Enable(); }
@@ -31,9 +36,16 @@ public class RRPlayer : MonoBehaviour {
 
     void Update() {
         CurrentSpeed = WalkSpeed;
+
         if (inputActions.Player.Jump.ReadValue<float>() > 0) { Jump(); }
 
         if (inputActions.Player.Punch.ReadValue<float>() > 0) { Punch(); }
+        
+        if (inputActions.Player.Place.ReadValue<float>() > 0) { PlaceBlock(); }
+
+        if (curIntractCooldown > 0) { 
+            curIntractCooldown -= Time.deltaTime;
+        }
         HandleMovement(); HandleMouseLook();
         Cursor.lockState = CursorLockMode.Locked;
         CharControll.Move(velocity * Time.deltaTime);
@@ -51,7 +63,42 @@ public class RRPlayer : MonoBehaviour {
         if (isGrounded) { velocity.y = JumpHeight; }
     }
     void Punch() {
-        ModelAnimator.SwingHand(0);
+        if (curIntractCooldown < 0.1) {
+            ModelAnimator.SwingHand(0);
+            RaycastHit hit;
+            if (Physics.Raycast(Cam.transform.position, Cam.transform.TransformDirection(Vector3.forward), out hit, InteractionLength)) {
+                Debug.DrawRay(Cam.transform.position, Cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                hit.collider.gameObject.GetComponent<RRBlock>().Punch(1);
+            } else {
+                Debug.DrawRay(Cam.transform.position, Cam.transform.TransformDirection(Vector3.forward) * InteractionLength, Color.white);
+            }
+            curIntractCooldown = InteractionCooldown;
+        }
+    }
+    void PlaceBlock() {
+        if (curIntractCooldown < 0.1f) {
+            ModelAnimator.SwingHand(0);
+            RaycastHit hit;
+            Vector3 placementPosition;
+
+            if (Physics.Raycast(Cam.transform.position, Cam.transform.TransformDirection(Vector3.forward), out hit, InteractionLength)) {
+                Debug.DrawRay(Cam.transform.position, Cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                placementPosition = hit.point + hit.normal * 0.5f;
+            } else {
+                Debug.DrawRay(Cam.transform.position, Cam.transform.TransformDirection(Vector3.forward) * InteractionLength, Color.white);
+                return;
+            }
+
+            Vector3Int blockPos = Vector3Int.RoundToInt(placementPosition);
+
+            GameObject blockParent = GameObject.Find("BlockLib/Chunk");
+
+            GameObject newBlock = Instantiate(yourBlockPrefab, blockPos, Quaternion.identity);
+            newBlock.transform.parent = blockParent.transform;
+            RRBlock rrBlock = newBlock.GetComponent<RRBlock>(); rrBlock.BlockType = Blocks.gray_rock;
+
+            curIntractCooldown = InteractionCooldown;
+        }
     }
 
     void HandleMovement() {

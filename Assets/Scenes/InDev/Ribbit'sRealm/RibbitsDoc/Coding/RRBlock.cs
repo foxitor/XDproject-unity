@@ -3,6 +3,8 @@ using System.Collections; using System.Collections.Generic; using UnityEngine; u
 public class RRBlock : MonoBehaviour {
     public Blocks BlockType;
     Blocks PreviousBlockType;
+    int damageState = 0, PreviousDamage = 0, ticksSinceLastHit; GameObject myBlockBreak;
+    float MaxDamage = 1f;
 
     Renderer blockRender;
 
@@ -12,16 +14,20 @@ public class RRBlock : MonoBehaviour {
     void Start() {
         Particles = GameObject.Find("ParticularLib").GetComponent<RRParticularLib>();
         BlockLib = GameObject.Find("BlockLib").GetComponent<RRBlockLibrary>();
+        
+        blockRender = this.gameObject.GetComponent<Renderer>();
 
         PreviousBlockType = BlockType;
-        blockRender = this.gameObject.GetComponent<Renderer>();
+        RewriteBlock(BlockType);
     }
 
     public void onTick(TickTypes tickTpye) {
         switch (BlockType) {
             case Blocks.green_rock :
-                if (tickTpye == TickTypes.volume_second) {
-                    Instantiate(Particles.ShareParticle("green_rock_spark"), transform.position, transform.rotation, transform);
+                if (blockRender.isVisible) {
+                    if (tickTpye == TickTypes.volume_rare) {
+                        SpawnParticle("green_rock_spark", "ambience", true, false, 1);
+                    }
                 } break;
         }
         if (tickTpye == TickTypes.volume_every) {
@@ -30,34 +36,51 @@ public class RRBlock : MonoBehaviour {
     }
     void CheckBlockState(Blocks blockType) {
         if (PreviousBlockType != BlockType) {
-            RewriteBlock(BlockType);
+            RewriteBlock(BlockType); 
             PreviousBlockType = BlockType;
         }
 
-        if (blockRender.isVisible) {
-            blockRender.shadowCastingMode = ShadowCastingMode.On;
-            blockRender.receiveShadows = true;
-            //BlockType = Blocks.gray_rock;
-        } else {
-            blockRender.shadowCastingMode = ShadowCastingMode.Off;
-            blockRender.receiveShadows = false;
-            
-            //BlockType = Blocks.black_rock;
+        ticksSinceLastHit++;
+
+        if (PreviousDamage != damageState) {
+            float compiledDamage = (float)damageState / MaxDamage;
+            int damageLevel = Mathf.Clamp(Mathf.FloorToInt(compiledDamage * BlockLib.BlockDamageScales.Length), 0, BlockLib.BlockDamageScales.Length);
+            ticksSinceLastHit = 0;
+
+            if (damageState >= MaxDamage) {
+                Destroy(this.gameObject);
+                return;
+            } else {
+                if (myBlockBreak == null && damageState != 0) {
+                    myBlockBreak = Instantiate(BlockLib.BlockBreakObj, transform.position, transform.rotation, transform);
+                }
+                if (myBlockBreak != null && damageLevel < BlockLib.BlockDamageScales.Length) {
+                    myBlockBreak.GetComponent<Renderer>().material = BlockLib.BlockDamageScales[damageLevel];
+                }
+            }
+            PreviousDamage = damageState;
         }
+        if (ticksSinceLastHit > 5) {
+            damageState = 0; Destroy(myBlockBreak); myBlockBreak = null;
+        }
+        OptimizeBlock();
     }
     void RewriteBlock(Blocks newBlockType) {
         switch (newBlockType) {
             case Blocks.gray_rock : 
                 ShapeObject("Cuboid");
                 TextureBlock(0);
+                MaxDamage = 4.5f;
             break;
             case Blocks.green_rock : 
                 ShapeObject("Cuboid");
                 TextureBlock(1);
+                MaxDamage = 10;
             break;
             case Blocks.black_rock : 
                 ShapeObject("Cuboid");
                 TextureBlock(2);
+                MaxDamage = 7;
             break;
         }
     }
@@ -67,4 +90,25 @@ public class RRBlock : MonoBehaviour {
         }
     }
     void TextureBlock(int TexturalIndex) { blockRender.material = BlockLib.BlockMaterials[TexturalIndex]; }
+
+    public void Punch(int Damage) {
+        damageState += Damage;
+    }
+    void OptimizeBlock() {
+        if (blockRender != null) {
+            if (blockRender.isVisible) {
+                blockRender.shadowCastingMode = ShadowCastingMode.On; blockRender.receiveShadows = true;
+            } else {
+                blockRender.shadowCastingMode = ShadowCastingMode.Off; blockRender.receiveShadows = false;
+            }
+        }
+    }
+    void SpawnParticle(string particleName, string spawnReason, bool DoOffset, bool DoFullOffset, int count) {
+        Vector3 RandomizedPosition = new Vector3(
+            DoFullOffset ? transform.position.x + Random.Range(-0.5f, 0.5f) : transform.position.x + 0,
+            DoOffset ? transform.position.y + Random.Range(-0.5f, 0.5f) : transform.position.y + 0,
+            DoFullOffset ? transform.position.z + Random.Range(-0.5f, 0.5f) : transform.position.z + 0
+        );
+        Instantiate(Particles.ShareParticle(particleName), RandomizedPosition, transform.rotation, transform);
+    }
 }

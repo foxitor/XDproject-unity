@@ -9,10 +9,15 @@ public enum Blocks {
 public class RRBlockLibrary : MonoBehaviour {
     public Mesh[] BlockMeshes;
     public Material[] BlockMaterials;
+    public GameObject BlockBreakObj;
+    public Material[] BlockDamageScales;
+
     public void TickNotify(TickTypes tick) {
-        foreach (Transform StoredBlock in transform) {
-            RRBlock BlockFunctionality = StoredBlock.GetComponent<RRBlock>();
-            BlockFunctionality.onTick(tick);
+        foreach (Transform StoredChunk in transform) {
+            foreach (Transform StoredBlock in StoredChunk) {
+                RRBlock BlockFunctionality = StoredBlock.GetComponent<RRBlock>();
+                BlockFunctionality.onTick(tick);
+            }
         }
     }
 }
