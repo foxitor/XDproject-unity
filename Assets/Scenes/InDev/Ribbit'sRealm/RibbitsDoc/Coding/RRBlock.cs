@@ -26,7 +26,7 @@ public class RRBlock : MonoBehaviour {
             case Blocks.green_rock :
                 if (blockRender.isVisible) {
                     if (tickTpye == TickTypes.volume_rare) {
-                        SpawnParticle("green_rock_spark", "ambience", true, false, 1);
+                        SpawnParticle("green_rock_spark", "ambience", true, true, 1);
                     }
                 } break;
         }
@@ -48,6 +48,13 @@ public class RRBlock : MonoBehaviour {
             ticksSinceLastHit = 0;
 
             if (damageState >= MaxDamage) {
+                GameObject Leftover = 
+                Instantiate(BlockLib.BreakSoundObj, transform.position, transform.rotation, GameObject.Find("SoundLib").transform);
+
+                Leftover.GetComponent<AudioSource>().clip = BlockLib.GetSoundBlockTypeSound(BlockType, "Impact");
+                Leftover.GetComponent<AudioSource>().Play();
+
+                Destroy(Leftover, 1f);
                 Destroy(this.gameObject);
                 return;
             } else {
@@ -56,7 +63,7 @@ public class RRBlock : MonoBehaviour {
                 }
                 if (myBlockBreak != null && damageLevel < BlockLib.BlockDamageScales.Length) {
                     myBlockBreak.GetComponent<Renderer>().material = BlockLib.BlockDamageScales[damageLevel];
-                }
+                } gameObject.GetComponent<AudioSource>().PlayOneShot(BlockLib.GetSoundBlockTypeSound(BlockType, "Hit"));
             }
             PreviousDamage = damageState;
         }

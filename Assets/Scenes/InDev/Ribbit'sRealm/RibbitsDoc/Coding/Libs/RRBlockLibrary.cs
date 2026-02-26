@@ -9,7 +9,7 @@ public enum Blocks {
 public class RRBlockLibrary : MonoBehaviour {
     public Mesh[] BlockMeshes;
     public Material[] BlockMaterials;
-    public GameObject BlockBreakObj;
+    public GameObject BlockBreakObj, BreakSoundObj;
     public Material[] BlockDamageScales;
 
     public void TickNotify(TickTypes tick) {
@@ -19,5 +19,10 @@ public class RRBlockLibrary : MonoBehaviour {
                 BlockFunctionality.onTick(tick);
             }
         }
+    }
+    public AudioClip GetSoundBlockTypeSound(Blocks blockType, string blockSoundType) {
+        AudioClip toReturn = null;
+        toReturn = GameObject.Find("SoundLib").GetComponent<RRSoundLib>().LoadBlockTypeSound(blockType, blockSoundType);
+        return toReturn;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections; using System.Collections.Generic; using UnityEngine; u
 
 public class RRPlayer : MonoBehaviour {
     public float CurrentSpeed = 0f, WalkSpeed = 2.6f, RunSpeed = 3f, CrouchSpeed = 1.6f, JumpHeight = 3.5f, 
-    mouseSensitivity = 0.1f, InteractionLength = 3.6f, InteractionCooldown = 1f, gravity = -9.81f;
+    mouseSensitivity = 0.1f, InteractionLength = 3.6f, InteractionCooldown = 0.375f, gravity = -9.81f;
     CharacterController CharControll;
     public Camera Cam; RibbitsRealmInput inputActions;
     public RRPlayerModel ModelAnimator;
@@ -92,22 +92,29 @@ public class RRPlayer : MonoBehaviour {
             Vector3Int blockPos = Vector3Int.RoundToInt(placementPosition);
 
             GameObject blockParent = GameObject.Find("BlockLib/Chunk");
+            if (Vector3.Distance(transform.position, blockPos) > 0.75) {
+                GameObject newBlock = Instantiate(yourBlockPrefab, blockPos, Quaternion.identity);
+                AudioSource BlockSource = newBlock.GetComponent<AudioSource>();
+                newBlock.transform.parent = blockParent.transform;
+                RRBlock rrBlock = newBlock.GetComponent<RRBlock>(); rrBlock.BlockType = Blocks.gray_rock;
 
-            GameObject newBlock = Instantiate(yourBlockPrefab, blockPos, Quaternion.identity);
-            newBlock.transform.parent = blockParent.transform;
-            RRBlock rrBlock = newBlock.GetComponent<RRBlock>(); rrBlock.BlockType = Blocks.gray_rock;
+                BlockSource.PlayOneShot(
+                    GameObject.Find("BlockLib").GetComponent<RRBlockLibrary>().GetSoundBlockTypeSound(rrBlock.BlockType, "Impact")
+                );
 
-            curIntractCooldown = InteractionCooldown;
+                curIntractCooldown = InteractionCooldown;
+            }
         }
     }
 
     void HandleMovement() {
         if (inputActions.Player.Run.ReadValue<float>() > 0) { isRunning = true; } else { isRunning = false; }
         if (inputActions.Player.Crouch.ReadValue<float>() > 0) { isCrouching = true; } else { isCrouching = false; }
-        float FinalSpeed;
-        if (isRunning) { FinalSpeed = RunSpeed; }
-        else if (isCrouching) { FinalSpeed = CrouchSpeed; }
-        else { FinalSpeed = WalkSpeed; }
+
+        float FinalSpeed = WalkSpeed;
+        if (isRunning) {  if (!isCrouching) { FinalSpeed = RunSpeed; } }
+        else if (isCrouching) { if (!isRunning) { FinalSpeed = CrouchSpeed; } }
+
         CurrentSpeed = FinalSpeed;
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y; CharControll.Move(move * CurrentSpeed * Time.deltaTime);
     }
