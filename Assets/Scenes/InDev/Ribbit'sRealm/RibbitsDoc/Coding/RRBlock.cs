@@ -63,11 +63,12 @@ public class RRBlock : MonoBehaviour {
                 }
                 if (myBlockBreak != null && damageLevel < BlockLib.BlockDamageScales.Length) {
                     myBlockBreak.GetComponent<Renderer>().material = BlockLib.BlockDamageScales[damageLevel];
-                } gameObject.GetComponent<AudioSource>().PlayOneShot(BlockLib.GetSoundBlockTypeSound(BlockType, "Hit"));
+                }
+                if (PreviousDamage < damageState) gameObject.GetComponent<AudioSource>().PlayOneShot(BlockLib.GetSoundBlockTypeSound(BlockType, "Hit"));
             }
             PreviousDamage = damageState;
         }
-        if (ticksSinceLastHit > 5) {
+        if (ticksSinceLastHit > 4) {
             damageState = 0; Destroy(myBlockBreak); myBlockBreak = null;
         }
         OptimizeBlock();

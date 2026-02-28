@@ -269,6 +269,194 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Hotbar"",
+            ""id"": ""713e1275-6fc6-4296-b362-7630dabadd25"",
+            ""actions"": [
+                {
+                    ""name"": ""FirstSlot"",
+                    ""type"": ""Button"",
+                    ""id"": ""9871fe40-d74c-475d-9803-d12e22fb0ad6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondSlot"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ee0f114-438a-411b-9fa3-9d5448393ac7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThirdSlot"",
+                    ""type"": ""Button"",
+                    ""id"": ""55c7cd7a-9bc3-4c27-b4b6-0389bb23ddbe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""4slot"",
+                    ""type"": ""Button"",
+                    ""id"": ""06de0f00-e819-4b03-bb5a-c2bd6d3c54f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""5slot"",
+                    ""type"": ""Button"",
+                    ""id"": ""1dc2aaa8-af43-40c0-b15c-b2e0c5662fea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""6slot"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe781e74-430c-49f7-b9d0-f2dae59627a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""7slot"",
+                    ""type"": ""Button"",
+                    ""id"": ""734265ca-231a-491b-a73b-261e302e8b7d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""8slot"",
+                    ""type"": ""Button"",
+                    ""id"": ""eeac4727-77e9-4541-92ed-2933c205f92c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""9slot"",
+                    ""type"": ""Button"",
+                    ""id"": ""3fc854b8-67a2-4596-ac44-cd6b33bdb134"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3a6e5050-0a96-406e-b02c-011b8bd8bbbe"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirstSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e103210-cdda-4c8c-b8a0-05094d32152c"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""914db13f-fc3d-4716-9328-05b0fdfa0f91"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThirdSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2df8d864-c482-433d-aaf2-bbbe636d6ca3"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""4slot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84ccf8e0-d0ab-4908-abac-0f7f626be897"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""5slot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42dff7fe-aec6-4a27-82ad-b17b2dea1054"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""6slot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36e8f3bf-dca7-4731-9789-aa173fa5dc08"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""7slot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d71db15-661f-48e5-8e17-5e4c3a8d5305"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""8slot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65c08a5c-5cb5-49ac-8498-46114257e787"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""9slot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -282,6 +470,17 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Punch = m_Player.FindAction("Punch", throwIfNotFound: true);
         m_Player_Place = m_Player.FindAction("Place", throwIfNotFound: true);
+        // Hotbar
+        m_Hotbar = asset.FindActionMap("Hotbar", throwIfNotFound: true);
+        m_Hotbar_FirstSlot = m_Hotbar.FindAction("FirstSlot", throwIfNotFound: true);
+        m_Hotbar_SecondSlot = m_Hotbar.FindAction("SecondSlot", throwIfNotFound: true);
+        m_Hotbar_ThirdSlot = m_Hotbar.FindAction("ThirdSlot", throwIfNotFound: true);
+        m_Hotbar__4slot = m_Hotbar.FindAction("4slot", throwIfNotFound: true);
+        m_Hotbar__5slot = m_Hotbar.FindAction("5slot", throwIfNotFound: true);
+        m_Hotbar__6slot = m_Hotbar.FindAction("6slot", throwIfNotFound: true);
+        m_Hotbar__7slot = m_Hotbar.FindAction("7slot", throwIfNotFound: true);
+        m_Hotbar__8slot = m_Hotbar.FindAction("8slot", throwIfNotFound: true);
+        m_Hotbar__9slot = m_Hotbar.FindAction("9slot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -433,6 +632,116 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Hotbar
+    private readonly InputActionMap m_Hotbar;
+    private List<IHotbarActions> m_HotbarActionsCallbackInterfaces = new List<IHotbarActions>();
+    private readonly InputAction m_Hotbar_FirstSlot;
+    private readonly InputAction m_Hotbar_SecondSlot;
+    private readonly InputAction m_Hotbar_ThirdSlot;
+    private readonly InputAction m_Hotbar__4slot;
+    private readonly InputAction m_Hotbar__5slot;
+    private readonly InputAction m_Hotbar__6slot;
+    private readonly InputAction m_Hotbar__7slot;
+    private readonly InputAction m_Hotbar__8slot;
+    private readonly InputAction m_Hotbar__9slot;
+    public struct HotbarActions
+    {
+        private @RibbitsRealmInput m_Wrapper;
+        public HotbarActions(@RibbitsRealmInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @FirstSlot => m_Wrapper.m_Hotbar_FirstSlot;
+        public InputAction @SecondSlot => m_Wrapper.m_Hotbar_SecondSlot;
+        public InputAction @ThirdSlot => m_Wrapper.m_Hotbar_ThirdSlot;
+        public InputAction @_4slot => m_Wrapper.m_Hotbar__4slot;
+        public InputAction @_5slot => m_Wrapper.m_Hotbar__5slot;
+        public InputAction @_6slot => m_Wrapper.m_Hotbar__6slot;
+        public InputAction @_7slot => m_Wrapper.m_Hotbar__7slot;
+        public InputAction @_8slot => m_Wrapper.m_Hotbar__8slot;
+        public InputAction @_9slot => m_Wrapper.m_Hotbar__9slot;
+        public InputActionMap Get() { return m_Wrapper.m_Hotbar; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(HotbarActions set) { return set.Get(); }
+        public void AddCallbacks(IHotbarActions instance)
+        {
+            if (instance == null || m_Wrapper.m_HotbarActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_HotbarActionsCallbackInterfaces.Add(instance);
+            @FirstSlot.started += instance.OnFirstSlot;
+            @FirstSlot.performed += instance.OnFirstSlot;
+            @FirstSlot.canceled += instance.OnFirstSlot;
+            @SecondSlot.started += instance.OnSecondSlot;
+            @SecondSlot.performed += instance.OnSecondSlot;
+            @SecondSlot.canceled += instance.OnSecondSlot;
+            @ThirdSlot.started += instance.OnThirdSlot;
+            @ThirdSlot.performed += instance.OnThirdSlot;
+            @ThirdSlot.canceled += instance.OnThirdSlot;
+            @_4slot.started += instance.On_4slot;
+            @_4slot.performed += instance.On_4slot;
+            @_4slot.canceled += instance.On_4slot;
+            @_5slot.started += instance.On_5slot;
+            @_5slot.performed += instance.On_5slot;
+            @_5slot.canceled += instance.On_5slot;
+            @_6slot.started += instance.On_6slot;
+            @_6slot.performed += instance.On_6slot;
+            @_6slot.canceled += instance.On_6slot;
+            @_7slot.started += instance.On_7slot;
+            @_7slot.performed += instance.On_7slot;
+            @_7slot.canceled += instance.On_7slot;
+            @_8slot.started += instance.On_8slot;
+            @_8slot.performed += instance.On_8slot;
+            @_8slot.canceled += instance.On_8slot;
+            @_9slot.started += instance.On_9slot;
+            @_9slot.performed += instance.On_9slot;
+            @_9slot.canceled += instance.On_9slot;
+        }
+
+        private void UnregisterCallbacks(IHotbarActions instance)
+        {
+            @FirstSlot.started -= instance.OnFirstSlot;
+            @FirstSlot.performed -= instance.OnFirstSlot;
+            @FirstSlot.canceled -= instance.OnFirstSlot;
+            @SecondSlot.started -= instance.OnSecondSlot;
+            @SecondSlot.performed -= instance.OnSecondSlot;
+            @SecondSlot.canceled -= instance.OnSecondSlot;
+            @ThirdSlot.started -= instance.OnThirdSlot;
+            @ThirdSlot.performed -= instance.OnThirdSlot;
+            @ThirdSlot.canceled -= instance.OnThirdSlot;
+            @_4slot.started -= instance.On_4slot;
+            @_4slot.performed -= instance.On_4slot;
+            @_4slot.canceled -= instance.On_4slot;
+            @_5slot.started -= instance.On_5slot;
+            @_5slot.performed -= instance.On_5slot;
+            @_5slot.canceled -= instance.On_5slot;
+            @_6slot.started -= instance.On_6slot;
+            @_6slot.performed -= instance.On_6slot;
+            @_6slot.canceled -= instance.On_6slot;
+            @_7slot.started -= instance.On_7slot;
+            @_7slot.performed -= instance.On_7slot;
+            @_7slot.canceled -= instance.On_7slot;
+            @_8slot.started -= instance.On_8slot;
+            @_8slot.performed -= instance.On_8slot;
+            @_8slot.canceled -= instance.On_8slot;
+            @_9slot.started -= instance.On_9slot;
+            @_9slot.performed -= instance.On_9slot;
+            @_9slot.canceled -= instance.On_9slot;
+        }
+
+        public void RemoveCallbacks(IHotbarActions instance)
+        {
+            if (m_Wrapper.m_HotbarActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IHotbarActions instance)
+        {
+            foreach (var item in m_Wrapper.m_HotbarActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_HotbarActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public HotbarActions @Hotbar => new HotbarActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -442,5 +751,17 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnPunch(InputAction.CallbackContext context);
         void OnPlace(InputAction.CallbackContext context);
+    }
+    public interface IHotbarActions
+    {
+        void OnFirstSlot(InputAction.CallbackContext context);
+        void OnSecondSlot(InputAction.CallbackContext context);
+        void OnThirdSlot(InputAction.CallbackContext context);
+        void On_4slot(InputAction.CallbackContext context);
+        void On_5slot(InputAction.CallbackContext context);
+        void On_6slot(InputAction.CallbackContext context);
+        void On_7slot(InputAction.CallbackContext context);
+        void On_8slot(InputAction.CallbackContext context);
+        void On_9slot(InputAction.CallbackContext context);
     }
 }

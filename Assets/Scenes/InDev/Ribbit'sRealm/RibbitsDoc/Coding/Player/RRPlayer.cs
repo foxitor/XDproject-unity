@@ -11,8 +11,8 @@ public class RRPlayer : MonoBehaviour {
     float rotationX = 0f, curIntractCooldown = 0f;
     Vector3 velocity; bool isGrounded, isRunning, isCrouching;
     
-    public GameObject yourBlockPrefab;
-    //public RRChunk targetChunk;
+    public GameObject BlockTemplate;
+    public int CurrentSlot = 0;
 
     void Awake() {
         CharControll = GetComponent<CharacterController>();
@@ -23,12 +23,10 @@ public class RRPlayer : MonoBehaviour {
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
         inputActions.Player.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Look.canceled += ctx => lookInput = Vector2.zero;
-        //inputActions.Player.Jump.performed += ctx => Jump();
     }
     void Start() {
         Cam = Camera.main;
         curIntractCooldown = InteractionCooldown;
-        //Chunker = GameObject.Find("BlockLib").GetComponent<RRChunkManager>();
     }
 
     void OnEnable() { inputActions.Enable(); }
@@ -48,7 +46,10 @@ public class RRPlayer : MonoBehaviour {
         }
         HandleMovement(); HandleMouseLook();
         Cursor.lockState = CursorLockMode.Locked;
-        CharControll.Move(velocity * Time.deltaTime);
+        CharControll.Move(velocity * Time.deltaTime); 
+        if (inputActions.Hotbar.FirstSlot.ReadValue<float>() > 0) { CurrentSlot = 0; }
+        if (inputActions.Hotbar.SecondSlot.ReadValue<float>() > 0) { CurrentSlot = 1; }
+        if (inputActions.Hotbar.ThirdSlot.ReadValue<float>() > 0) { CurrentSlot = 2; }
     }
     void FixedUpdate() {
         isGrounded = CharControll.isGrounded;
@@ -92,11 +93,17 @@ public class RRPlayer : MonoBehaviour {
             Vector3Int blockPos = Vector3Int.RoundToInt(placementPosition);
 
             GameObject blockParent = GameObject.Find("BlockLib/Chunk");
+            Blocks PickedBlock = Blocks.gray_rock;
+            switch (CurrentSlot) {
+                case 0 : PickedBlock = Blocks.gray_rock; break;
+                case 1 : PickedBlock = Blocks.black_rock; break;
+                case 2 : PickedBlock = Blocks.green_rock; break;
+            }
             if (Vector3.Distance(transform.position, blockPos) > 0.75) {
-                GameObject newBlock = Instantiate(yourBlockPrefab, blockPos, Quaternion.identity);
+                GameObject newBlock = Instantiate(BlockTemplate, blockPos, Quaternion.identity);
                 AudioSource BlockSource = newBlock.GetComponent<AudioSource>();
                 newBlock.transform.parent = blockParent.transform;
-                RRBlock rrBlock = newBlock.GetComponent<RRBlock>(); rrBlock.BlockType = Blocks.gray_rock;
+                RRBlock rrBlock = newBlock.GetComponent<RRBlock>(); rrBlock.BlockType = PickedBlock;
 
                 BlockSource.PlayOneShot(
                     GameObject.Find("BlockLib").GetComponent<RRBlockLibrary>().GetSoundBlockTypeSound(rrBlock.BlockType, "Impact")
