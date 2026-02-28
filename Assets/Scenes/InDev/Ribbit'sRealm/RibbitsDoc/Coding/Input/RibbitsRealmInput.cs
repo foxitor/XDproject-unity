@@ -302,7 +302,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""4slot"",
+                    ""name"": ""ForthSlot"",
                     ""type"": ""Button"",
                     ""id"": ""06de0f00-e819-4b03-bb5a-c2bd6d3c54f5"",
                     ""expectedControlType"": ""Button"",
@@ -311,7 +311,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""5slot"",
+                    ""name"": ""FifthSlot"",
                     ""type"": ""Button"",
                     ""id"": ""1dc2aaa8-af43-40c0-b15c-b2e0c5662fea"",
                     ""expectedControlType"": ""Button"",
@@ -320,7 +320,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""6slot"",
+                    ""name"": ""SixthSlot"",
                     ""type"": ""Button"",
                     ""id"": ""fe781e74-430c-49f7-b9d0-f2dae59627a2"",
                     ""expectedControlType"": ""Button"",
@@ -329,7 +329,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""7slot"",
+                    ""name"": ""SeventhSlot"",
                     ""type"": ""Button"",
                     ""id"": ""734265ca-231a-491b-a73b-261e302e8b7d"",
                     ""expectedControlType"": ""Button"",
@@ -338,7 +338,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""8slot"",
+                    ""name"": ""EightSlot"",
                     ""type"": ""Button"",
                     ""id"": ""eeac4727-77e9-4541-92ed-2933c205f92c"",
                     ""expectedControlType"": ""Button"",
@@ -347,7 +347,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""9slot"",
+                    ""name"": ""NinthSlot"",
                     ""type"": ""Button"",
                     ""id"": ""3fc854b8-67a2-4596-ac44-cd6b33bdb134"",
                     ""expectedControlType"": ""Button"",
@@ -397,7 +397,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""4slot"",
+                    ""action"": ""ForthSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -408,7 +408,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""5slot"",
+                    ""action"": ""FifthSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -419,7 +419,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""6slot"",
+                    ""action"": ""SixthSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -430,7 +430,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""7slot"",
+                    ""action"": ""SeventhSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -441,7 +441,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""8slot"",
+                    ""action"": ""EightSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -452,7 +452,7 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""9slot"",
+                    ""action"": ""NinthSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -475,12 +475,12 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
         m_Hotbar_FirstSlot = m_Hotbar.FindAction("FirstSlot", throwIfNotFound: true);
         m_Hotbar_SecondSlot = m_Hotbar.FindAction("SecondSlot", throwIfNotFound: true);
         m_Hotbar_ThirdSlot = m_Hotbar.FindAction("ThirdSlot", throwIfNotFound: true);
-        m_Hotbar__4slot = m_Hotbar.FindAction("4slot", throwIfNotFound: true);
-        m_Hotbar__5slot = m_Hotbar.FindAction("5slot", throwIfNotFound: true);
-        m_Hotbar__6slot = m_Hotbar.FindAction("6slot", throwIfNotFound: true);
-        m_Hotbar__7slot = m_Hotbar.FindAction("7slot", throwIfNotFound: true);
-        m_Hotbar__8slot = m_Hotbar.FindAction("8slot", throwIfNotFound: true);
-        m_Hotbar__9slot = m_Hotbar.FindAction("9slot", throwIfNotFound: true);
+        m_Hotbar_ForthSlot = m_Hotbar.FindAction("ForthSlot", throwIfNotFound: true);
+        m_Hotbar_FifthSlot = m_Hotbar.FindAction("FifthSlot", throwIfNotFound: true);
+        m_Hotbar_SixthSlot = m_Hotbar.FindAction("SixthSlot", throwIfNotFound: true);
+        m_Hotbar_SeventhSlot = m_Hotbar.FindAction("SeventhSlot", throwIfNotFound: true);
+        m_Hotbar_EightSlot = m_Hotbar.FindAction("EightSlot", throwIfNotFound: true);
+        m_Hotbar_NinthSlot = m_Hotbar.FindAction("NinthSlot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -639,12 +639,12 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Hotbar_FirstSlot;
     private readonly InputAction m_Hotbar_SecondSlot;
     private readonly InputAction m_Hotbar_ThirdSlot;
-    private readonly InputAction m_Hotbar__4slot;
-    private readonly InputAction m_Hotbar__5slot;
-    private readonly InputAction m_Hotbar__6slot;
-    private readonly InputAction m_Hotbar__7slot;
-    private readonly InputAction m_Hotbar__8slot;
-    private readonly InputAction m_Hotbar__9slot;
+    private readonly InputAction m_Hotbar_ForthSlot;
+    private readonly InputAction m_Hotbar_FifthSlot;
+    private readonly InputAction m_Hotbar_SixthSlot;
+    private readonly InputAction m_Hotbar_SeventhSlot;
+    private readonly InputAction m_Hotbar_EightSlot;
+    private readonly InputAction m_Hotbar_NinthSlot;
     public struct HotbarActions
     {
         private @RibbitsRealmInput m_Wrapper;
@@ -652,12 +652,12 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
         public InputAction @FirstSlot => m_Wrapper.m_Hotbar_FirstSlot;
         public InputAction @SecondSlot => m_Wrapper.m_Hotbar_SecondSlot;
         public InputAction @ThirdSlot => m_Wrapper.m_Hotbar_ThirdSlot;
-        public InputAction @_4slot => m_Wrapper.m_Hotbar__4slot;
-        public InputAction @_5slot => m_Wrapper.m_Hotbar__5slot;
-        public InputAction @_6slot => m_Wrapper.m_Hotbar__6slot;
-        public InputAction @_7slot => m_Wrapper.m_Hotbar__7slot;
-        public InputAction @_8slot => m_Wrapper.m_Hotbar__8slot;
-        public InputAction @_9slot => m_Wrapper.m_Hotbar__9slot;
+        public InputAction @ForthSlot => m_Wrapper.m_Hotbar_ForthSlot;
+        public InputAction @FifthSlot => m_Wrapper.m_Hotbar_FifthSlot;
+        public InputAction @SixthSlot => m_Wrapper.m_Hotbar_SixthSlot;
+        public InputAction @SeventhSlot => m_Wrapper.m_Hotbar_SeventhSlot;
+        public InputAction @EightSlot => m_Wrapper.m_Hotbar_EightSlot;
+        public InputAction @NinthSlot => m_Wrapper.m_Hotbar_NinthSlot;
         public InputActionMap Get() { return m_Wrapper.m_Hotbar; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -676,24 +676,24 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
             @ThirdSlot.started += instance.OnThirdSlot;
             @ThirdSlot.performed += instance.OnThirdSlot;
             @ThirdSlot.canceled += instance.OnThirdSlot;
-            @_4slot.started += instance.On_4slot;
-            @_4slot.performed += instance.On_4slot;
-            @_4slot.canceled += instance.On_4slot;
-            @_5slot.started += instance.On_5slot;
-            @_5slot.performed += instance.On_5slot;
-            @_5slot.canceled += instance.On_5slot;
-            @_6slot.started += instance.On_6slot;
-            @_6slot.performed += instance.On_6slot;
-            @_6slot.canceled += instance.On_6slot;
-            @_7slot.started += instance.On_7slot;
-            @_7slot.performed += instance.On_7slot;
-            @_7slot.canceled += instance.On_7slot;
-            @_8slot.started += instance.On_8slot;
-            @_8slot.performed += instance.On_8slot;
-            @_8slot.canceled += instance.On_8slot;
-            @_9slot.started += instance.On_9slot;
-            @_9slot.performed += instance.On_9slot;
-            @_9slot.canceled += instance.On_9slot;
+            @ForthSlot.started += instance.OnForthSlot;
+            @ForthSlot.performed += instance.OnForthSlot;
+            @ForthSlot.canceled += instance.OnForthSlot;
+            @FifthSlot.started += instance.OnFifthSlot;
+            @FifthSlot.performed += instance.OnFifthSlot;
+            @FifthSlot.canceled += instance.OnFifthSlot;
+            @SixthSlot.started += instance.OnSixthSlot;
+            @SixthSlot.performed += instance.OnSixthSlot;
+            @SixthSlot.canceled += instance.OnSixthSlot;
+            @SeventhSlot.started += instance.OnSeventhSlot;
+            @SeventhSlot.performed += instance.OnSeventhSlot;
+            @SeventhSlot.canceled += instance.OnSeventhSlot;
+            @EightSlot.started += instance.OnEightSlot;
+            @EightSlot.performed += instance.OnEightSlot;
+            @EightSlot.canceled += instance.OnEightSlot;
+            @NinthSlot.started += instance.OnNinthSlot;
+            @NinthSlot.performed += instance.OnNinthSlot;
+            @NinthSlot.canceled += instance.OnNinthSlot;
         }
 
         private void UnregisterCallbacks(IHotbarActions instance)
@@ -707,24 +707,24 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
             @ThirdSlot.started -= instance.OnThirdSlot;
             @ThirdSlot.performed -= instance.OnThirdSlot;
             @ThirdSlot.canceled -= instance.OnThirdSlot;
-            @_4slot.started -= instance.On_4slot;
-            @_4slot.performed -= instance.On_4slot;
-            @_4slot.canceled -= instance.On_4slot;
-            @_5slot.started -= instance.On_5slot;
-            @_5slot.performed -= instance.On_5slot;
-            @_5slot.canceled -= instance.On_5slot;
-            @_6slot.started -= instance.On_6slot;
-            @_6slot.performed -= instance.On_6slot;
-            @_6slot.canceled -= instance.On_6slot;
-            @_7slot.started -= instance.On_7slot;
-            @_7slot.performed -= instance.On_7slot;
-            @_7slot.canceled -= instance.On_7slot;
-            @_8slot.started -= instance.On_8slot;
-            @_8slot.performed -= instance.On_8slot;
-            @_8slot.canceled -= instance.On_8slot;
-            @_9slot.started -= instance.On_9slot;
-            @_9slot.performed -= instance.On_9slot;
-            @_9slot.canceled -= instance.On_9slot;
+            @ForthSlot.started -= instance.OnForthSlot;
+            @ForthSlot.performed -= instance.OnForthSlot;
+            @ForthSlot.canceled -= instance.OnForthSlot;
+            @FifthSlot.started -= instance.OnFifthSlot;
+            @FifthSlot.performed -= instance.OnFifthSlot;
+            @FifthSlot.canceled -= instance.OnFifthSlot;
+            @SixthSlot.started -= instance.OnSixthSlot;
+            @SixthSlot.performed -= instance.OnSixthSlot;
+            @SixthSlot.canceled -= instance.OnSixthSlot;
+            @SeventhSlot.started -= instance.OnSeventhSlot;
+            @SeventhSlot.performed -= instance.OnSeventhSlot;
+            @SeventhSlot.canceled -= instance.OnSeventhSlot;
+            @EightSlot.started -= instance.OnEightSlot;
+            @EightSlot.performed -= instance.OnEightSlot;
+            @EightSlot.canceled -= instance.OnEightSlot;
+            @NinthSlot.started -= instance.OnNinthSlot;
+            @NinthSlot.performed -= instance.OnNinthSlot;
+            @NinthSlot.canceled -= instance.OnNinthSlot;
         }
 
         public void RemoveCallbacks(IHotbarActions instance)
@@ -757,11 +757,11 @@ public partial class @RibbitsRealmInput: IInputActionCollection2, IDisposable
         void OnFirstSlot(InputAction.CallbackContext context);
         void OnSecondSlot(InputAction.CallbackContext context);
         void OnThirdSlot(InputAction.CallbackContext context);
-        void On_4slot(InputAction.CallbackContext context);
-        void On_5slot(InputAction.CallbackContext context);
-        void On_6slot(InputAction.CallbackContext context);
-        void On_7slot(InputAction.CallbackContext context);
-        void On_8slot(InputAction.CallbackContext context);
-        void On_9slot(InputAction.CallbackContext context);
+        void OnForthSlot(InputAction.CallbackContext context);
+        void OnFifthSlot(InputAction.CallbackContext context);
+        void OnSixthSlot(InputAction.CallbackContext context);
+        void OnSeventhSlot(InputAction.CallbackContext context);
+        void OnEightSlot(InputAction.CallbackContext context);
+        void OnNinthSlot(InputAction.CallbackContext context);
     }
 }

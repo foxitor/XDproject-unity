@@ -5,10 +5,12 @@ public class BlockSoundTypes {
     public Blocks block;
     public AudioClip[] Impacts;
     public AudioClip[] Hits;
+    public AudioClip[] Specials;
 }
 
 public class RRSoundLib : MonoBehaviour {
     public BlockSoundTypes[] Sounds;
+
     public AudioClip LoadBlockTypeSound(Blocks blockType, string blockSoundType) {
         foreach (BlockSoundTypes bst in Sounds) {
             if (bst.block == blockType) {
@@ -23,6 +25,12 @@ public class RRSoundLib : MonoBehaviour {
                     case "hits":
                             clips = bst.Hits;
                         break;
+
+                    case "special":
+                    case "specials":
+                            clips = bst.Specials;
+                        break;
+
                     default:
                         Debug.LogWarning("Unknown blockSoundType: " + blockSoundType);
                         return null;

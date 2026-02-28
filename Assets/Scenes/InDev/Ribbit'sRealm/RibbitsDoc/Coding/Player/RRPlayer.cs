@@ -107,7 +107,7 @@ public class RRPlayer : MonoBehaviour {
 
                 BlockSource.PlayOneShot(
                     GameObject.Find("BlockLib").GetComponent<RRBlockLibrary>().GetSoundBlockTypeSound(rrBlock.BlockType, "Impact")
-                );
+                ); BlockSource.pitch = Random.Range(0.9f, 1.1f);
 
                 curIntractCooldown = InteractionCooldown;
             }

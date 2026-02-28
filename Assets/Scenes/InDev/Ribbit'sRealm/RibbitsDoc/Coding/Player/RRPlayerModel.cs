@@ -85,6 +85,7 @@ public class RRPlayerModel : MonoBehaviour {
                 if (Physics.Raycast(Player.transform.position, Player.transform.TransformDirection(-Vector3.up), out hit, 1f)) {
                     if (hit.collider.gameObject.GetComponent<RRBlock>() != null) {
                         RRBlock rrBlockComp = hit.collider.gameObject.GetComponent<RRBlock>();
+                        hit.collider.gameObject.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
                         hit.collider.gameObject.GetComponent<AudioSource>().PlayOneShot(GameObject.Find("BlockLib")
                             .GetComponent<RRBlockLibrary>().GetSoundBlockTypeSound(rrBlockComp.BlockType, "Hit"));
                     }

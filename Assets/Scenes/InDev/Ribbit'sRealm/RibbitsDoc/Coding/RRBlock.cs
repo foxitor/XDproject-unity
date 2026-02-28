@@ -24,7 +24,7 @@ public class RRBlock : MonoBehaviour {
     public void onTick(TickTypes tickTpye) {
         switch (BlockType) {
             case Blocks.green_rock :
-                if (blockRender.isVisible) {
+                if (blockRender != null && blockRender.isVisible) {
                     if (tickTpye == TickTypes.volume_rare) {
                         SpawnParticle("green_rock_spark", "ambience", true, true, 1);
                     }
@@ -64,40 +64,44 @@ public class RRBlock : MonoBehaviour {
                 if (myBlockBreak != null && damageLevel < BlockLib.BlockDamageScales.Length) {
                     myBlockBreak.GetComponent<Renderer>().material = BlockLib.BlockDamageScales[damageLevel];
                 }
-                if (PreviousDamage < damageState) gameObject.GetComponent<AudioSource>().PlayOneShot(BlockLib.GetSoundBlockTypeSound(BlockType, "Hit"));
+                if (PreviousDamage < damageState) {
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(BlockLib.GetSoundBlockTypeSound(BlockType, "Hit"));
+                    gameObject.GetComponent<AudioSource>().pitch = Random.Range(0.9f,1.1f);
+                }
             }
             PreviousDamage = damageState;
         }
-        if (ticksSinceLastHit > 4) {
-            damageState = 0; Destroy(myBlockBreak); myBlockBreak = null;
+        if (ticksSinceLastHit > 5 && damageState > 0) {
+            damageState--; ticksSinceLastHit = 0; if (damageState < 1) { Destroy(myBlockBreak); myBlockBreak = null; }
         }
         OptimizeBlock();
     }
     void RewriteBlock(Blocks newBlockType) {
-        switch (newBlockType) {
-            case Blocks.gray_rock : 
-                ShapeObject("Cuboid");
-                TextureBlock(0);
-                MaxDamage = 4.5f;
-            break;
-            case Blocks.green_rock : 
-                ShapeObject("Cuboid");
-                TextureBlock(1);
-                MaxDamage = 10;
-            break;
-            case Blocks.black_rock : 
-                ShapeObject("Cuboid");
-                TextureBlock(2);
-                MaxDamage = 7;
-            break;
-        }
+        ShapeObject(BlockLib.GetBlockIntData(newBlockType, "Model")); 
+        TextureBlock(BlockLib.GetBlockIntData(newBlockType, "Texture")); 
+        MaxDamage = BlockLib.GetBlockFloatData(newBlockType, "Durability");
+        //switch (newBlockType) {
+        //    case Blocks.gray_rock : 
+        //        ShapeObject("Cuboid");
+        //        TextureBlock(0);
+        //        MaxDamage = 4.5f;
+        //    break;
+        //    case Blocks.green_rock : 
+        //        ShapeObject("Cuboid");
+        //        TextureBlock(1);
+        //        MaxDamage = 10f;
+        //    break;
+        //    case Blocks.black_rock : 
+        //        ShapeObject("Cuboid");
+        //        TextureBlock(2);
+        //        MaxDamage = 7f;
+        //    break;
+        //}
     }
-    void ShapeObject(string Type) {
-        if (Type == "Cuboid") {
-            this.gameObject.GetComponent<MeshFilter>().mesh = BlockLib.BlockMeshes[0];
-        }
+    void ShapeObject(int ShapeId) {
+        if (BlockLib != null) this.gameObject.GetComponent<MeshFilter>().mesh = BlockLib.BlockMeshes[ShapeId];
     }
-    void TextureBlock(int TexturalIndex) { blockRender.material = BlockLib.BlockMaterials[TexturalIndex]; }
+    void TextureBlock(int TexturalIndex) { if (BlockLib != null) blockRender.material = BlockLib.BlockMaterials[TexturalIndex]; }
 
     public void Punch(int Damage) {
         damageState += Damage;

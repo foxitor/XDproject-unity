@@ -280,7 +280,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "4slot",
+                    "name": "ForthSlot",
                     "type": "Button",
                     "id": "06de0f00-e819-4b03-bb5a-c2bd6d3c54f5",
                     "expectedControlType": "Button",
@@ -289,7 +289,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "5slot",
+                    "name": "FifthSlot",
                     "type": "Button",
                     "id": "1dc2aaa8-af43-40c0-b15c-b2e0c5662fea",
                     "expectedControlType": "Button",
@@ -298,7 +298,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "6slot",
+                    "name": "SixthSlot",
                     "type": "Button",
                     "id": "fe781e74-430c-49f7-b9d0-f2dae59627a2",
                     "expectedControlType": "Button",
@@ -307,7 +307,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "7slot",
+                    "name": "SeventhSlot",
                     "type": "Button",
                     "id": "734265ca-231a-491b-a73b-261e302e8b7d",
                     "expectedControlType": "Button",
@@ -316,7 +316,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "8slot",
+                    "name": "EightSlot",
                     "type": "Button",
                     "id": "eeac4727-77e9-4541-92ed-2933c205f92c",
                     "expectedControlType": "Button",
@@ -325,7 +325,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "9slot",
+                    "name": "NinthSlot",
                     "type": "Button",
                     "id": "3fc854b8-67a2-4596-ac44-cd6b33bdb134",
                     "expectedControlType": "Button",
@@ -375,7 +375,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "4slot",
+                    "action": "ForthSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -386,7 +386,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "5slot",
+                    "action": "FifthSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -397,7 +397,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "6slot",
+                    "action": "SixthSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -408,7 +408,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "7slot",
+                    "action": "SeventhSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -419,7 +419,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "8slot",
+                    "action": "EightSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -430,7 +430,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "9slot",
+                    "action": "NinthSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
