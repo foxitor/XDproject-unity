@@ -1,21 +1,22 @@
 using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.InputSystem;
 
-public class RRPlayer : MonoBehaviour {
+public class RRPlayeCC : MonoBehaviour {
     public float CurrentSpeed = 0f, WalkSpeed = 2.6f, RunSpeed = 3f, CrouchSpeed = 1.6f, JumpHeight = 3.5f, 
-    mouseSensitivity = 0.1f, InteractionLength = 3.6f, InteractionCooldown = 0.375f; //gravity = -9.81f;
-
+    mouseSensitivity = 0.1f, InteractionLength = 3.6f, InteractionCooldown = 0.375f, gravity = -9.81f;
+    CharacterController CharControll;
     public Camera Cam; RibbitsRealmInput inputActions;
     public RRPlayerModel ModelAnimator;
 
     Vector2 moveInput; Vector2 lookInput;
     float rotationX = 0f, curIntractCooldown = 0f;
     Vector3 velocity; bool isGrounded, isRunning, isCrouching;
-    Rigidbody Phy;
     
     public GameObject BlockTemplate;
     public int CurrentSlot = 0;
 
     void Awake() {
+        CharControll = GetComponent<CharacterController>();
+
         inputActions = new RibbitsRealmInput();
 
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
@@ -24,7 +25,7 @@ public class RRPlayer : MonoBehaviour {
         inputActions.Player.Look.canceled += ctx => lookInput = Vector2.zero;
     }
     void Start() {
-        Cam = Camera.main; Phy = this.gameObject.GetComponent<Rigidbody>();
+        Cam = Camera.main;
         curIntractCooldown = InteractionCooldown;
     }
 
@@ -43,28 +44,22 @@ public class RRPlayer : MonoBehaviour {
         if (curIntractCooldown > 0) { 
             curIntractCooldown -= Time.deltaTime;
         }
-        HandleMouseLook();
+        HandleMovement(); HandleMouseLook();
         Cursor.lockState = CursorLockMode.Locked;
+        CharControll.Move(velocity * Time.deltaTime); 
         if (inputActions.Hotbar.FirstSlot.ReadValue<float>() > 0) { CurrentSlot = 0; }
         if (inputActions.Hotbar.SecondSlot.ReadValue<float>() > 0) { CurrentSlot = 1; }
         if (inputActions.Hotbar.ThirdSlot.ReadValue<float>() > 0) { CurrentSlot = 2; }
     }
     void FixedUpdate() {
-        onGround();
-        if (!isGrounded) {
-            velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
-            if (velocity.y < -20) velocity.y = -20; // ограничение скорости падения
-        } else {
-            velocity.y = 0;
-        }
-        HandleMovement();
-
-        Vector3 moveDir = transform.right * moveInput.x + transform.forward * moveInput.y;
-        Vector3 targetVelocity = moveDir * CurrentSpeed;
-        targetVelocity.y = velocity.y;
-        Phy.velocity = targetVelocity;
+        isGrounded = CharControll.isGrounded;
+        if(!isGrounded) {
+            velocity.y += gravity * Time.deltaTime;
+            if (velocity.y > 10) {
+                velocity.y = 10;
+            }
+        } else { velocity.y = 0; }
     }
-
     void Jump() {
         if (isGrounded) { velocity.y = JumpHeight; }
     }
@@ -129,9 +124,7 @@ public class RRPlayer : MonoBehaviour {
         else if (isCrouching) { if (!isRunning) { FinalSpeed = CrouchSpeed; } }
 
         CurrentSpeed = FinalSpeed;
-        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y; 
-        //Phy.AddForce(new Vector3(move.x, velocity.y, move.z) * CurrentSpeed * Time.deltaTime); 
-        //CharControll.Move(move * CurrentSpeed * Time.deltaTime);
+        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y; CharControll.Move(move * CurrentSpeed * Time.deltaTime);
     }
 
     void HandleMouseLook() {
@@ -140,17 +133,5 @@ public class RRPlayer : MonoBehaviour {
         rotationX -= lookInput.y * mouseSensitivity;
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
         Cam.transform.localEulerAngles = new Vector3(rotationX, 0, 0);
-    }
-    void onGround() {
-        Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * 0.5f), transform.position.z);
-        Vector3 direction = Vector3.down;
-        float distance = 0.75f;
-
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance)) {
-            Debug.DrawRay(origin, direction * distance, Color.red);
-            isGrounded = true;
-        } else {
-            isGrounded = false;
-        }
     }
 }
