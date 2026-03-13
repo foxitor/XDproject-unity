@@ -51,6 +51,11 @@ public class RRPlayer : MonoBehaviour {
     void FixedUpdate() {
         HandleMovement();
         HandleCameraMovement();
+        if (isGrounded) {
+            if (Phy.velocity.y < 0) {
+                Phy.velocity = new Vector3(Phy.velocity.x, 0, Phy.velocity.z);
+            }
+        }
     }
     void HandleMovement() {
         if (inputActions.Player.Crouch.ReadValue<float>() > 0) { curPos = RRPose.crouch; }
@@ -62,6 +67,12 @@ public class RRPlayer : MonoBehaviour {
             case RRPose.run : CurSpeed = SprintSpeed; break;
             default : CurSpeed = WalkSpeed; break;
         }
+        VerifyGrounded();
+        if (curPos == RRPose.crouch && !isGrounded && Phy.velocity.y == 0f) {
+            FallCrouchSpeed = 0;
+        } else { FallCrouchSpeed = 1; }
+
+        //Debug.Log(transform.localEulerAngles + "");
 
         Vector3 CurVel = Phy.velocity;
         Vector3 TargVel = new Vector3(move.x, 0, move.y);
@@ -72,17 +83,12 @@ public class RRPlayer : MonoBehaviour {
         VelChange = new Vector3(VelChange.x, 0, VelChange.z);
 
         Phy.AddForce(VelChange, ForceMode.VelocityChange);
-        VerifyGrounded();
-        if (curPos == RRPose.crouch && !isGrounded && Phy.velocity.y == 0f) {
-            FallCrouchSpeed = 0;
-        } else { FallCrouchSpeed = 1; }
     }
     void HandleCameraMovement() {
-        transform.Rotate(Vector3.up * look.x * 0.1f);
-
-        lookRotation += (-look.y * 0.1f);
+        transform.localEulerAngles += (Vector3.up * look.x * 0.1f);
+        lookRotation -= look.y * 0.1f;
         lookRotation = Mathf.Clamp(lookRotation, -90, 90);
-        cam.eulerAngles = new Vector3(lookRotation, cam.eulerAngles.y, cam.eulerAngles.z);
+        cam.localEulerAngles = new Vector3(lookRotation, 0, 0);
     }
     void Jump() {
         Vector3 jumpForce = Vector3.zero;
