@@ -1,0 +1,85 @@
+{
+    "name": "JungleFightControlls",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "4687f12f-f0b2-4f8c-acb2-97072b4b921c",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "54829c45-b8a9-4228-86f9-218e88ba9e33",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Simbit",
+                    "type": "Button",
+                    "id": "c201f94e-f88e-4830-9ddf-096163d182ac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "005f1c2f-b567-495f-b23f-6d5776ca10db",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "677ad48b-9682-4922-84c9-410fc921e2ed",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33328b71-fce4-47ae-8d9e-1a8b96ec6fa3",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfc0e930-549f-450c-8470-b65975eff680",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Simbit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "31fda63d-4c01-430b-873c-3a988875e49d",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

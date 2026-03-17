@@ -1,0 +1,85 @@
+{
+    "name": "ChertoletControls",
+    "maps": [
+        {
+            "name": "GamePlay",
+            "id": "e70b6012-1cc2-4f15-a1b8-2d6bfbeaa856",
+            "actions": [
+                {
+                    "name": "Impulse",
+                    "type": "Button",
+                    "id": "00441e31-03c4-4cb3-ba54-736b308d0856",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Simbit",
+                    "type": "Button",
+                    "id": "ab3227ad-de07-49d3-bc37-d54bfa5c56a6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "6f70a01c-fab7-4127-b378-1531fafbee2d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "031e4ba3-95b1-479b-8af3-dfe1374a952a",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Impulse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6ff5a41-b841-4ab0-b982-8693df795af5",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Impulse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e2e1c8b-255a-459e-9046-acaa859ddae2",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Simbit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0695092-6976-4349-8795-3a02818bd080",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

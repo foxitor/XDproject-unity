@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Kill
+  - Portal
+  - Pad
+  - Item
+  - Box
+  - Danger
+  - Cookie
+  - Obstacle
+  - RadarArrow
+  - Interactive
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Obstacle
+  - Water
+  - UI
+  - Bush
+  - PP
+  - MInimapo
+  - FirstPerson
+  - ThirdPerson
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: BackGround
+    uniqueID: 1850160551
+    locked: 0
+  - name: BackLayer
+    uniqueID: 1231557977
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: FrontLayer
+    uniqueID: 3306605051
+    locked: 0
+  - name: UI
+    uniqueID: 2321422893
+    locked: 0
+  - name: Hiest
+    uniqueID: 3168903103
+    locked: 0

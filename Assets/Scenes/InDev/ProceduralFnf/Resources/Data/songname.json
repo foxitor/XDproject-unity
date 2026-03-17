@@ -1,0 +1,33 @@
+{
+	"speed": 3.5,
+	"stage": "stage",
+	"player1": "bf",
+	"player2": "dad",
+	"events": [],
+	"notes": [
+		{
+			"gfSection": false,
+			"altAnim": false,
+			"sectionNotes": [
+				[0, 0],
+				[0, 7],
+				[150, 1],
+				[150, 6],
+				[300, 2],
+				[300, 5],
+				[450, 4],
+				[450, 3]
+			],
+			"bpm": 150,
+			"sectionBeats": 4,
+			"changeBPM": false,
+			"mustHitSection": true
+		}
+	],
+	"gfVersion": "gf",
+	"format": "psych_v1",
+	"bpm": 85,
+	"needsVoices": true,
+	"song": "SongName",
+	"offset": 0
+}

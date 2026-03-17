@@ -1,0 +1,39 @@
+{
+  "speed": 1.5,
+  "stage": "Stage01",
+  "player1": "PlayerA",
+  "player2": "PlayerB",
+  "events": [],
+  "notes": [
+    {
+      "gfSection": false,
+      "altAnim": false,
+      "sectionNotes": [
+        [150, 1],
+        [300, 0]
+      ],
+      "bpm": 120,
+      "sectionBeats": 4,
+      "changeBPM": false,
+      "mustHitSection": true
+    },
+    {
+      "gfSection": true,
+      "altAnim": true,
+      "sectionNotes": [
+        [450, 2],
+        [600, 3]
+      ],
+      "bpm": 100,
+      "sectionBeats": 4,
+      "changeBPM": true,
+      "mustHitSection": false
+    }
+  ],
+  "gfVersion": "1.0",
+  "format": "json",
+  "bpm": 85,
+  "needsVoices": false,
+  "song": "GPT's song",
+  "offset": 0
+}
